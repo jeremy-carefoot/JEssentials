@@ -1,0 +1,243 @@
+main: com.bluecreeper111.jessentials.Main
+author: bluecreeper111
+version: 1.3.4
+description: Fully customizable essentials plugin.
+name: JEssentials
+api-version: 1.13
+commands:
+  heal:
+    description: Allows player to heal themself or others.
+    usage: /<command>
+  feed:
+    description: Allows player to feed themself or others.
+    usage: /<command>
+  clear:
+    description: Allows player to clear their inventory or others inventory.
+    usage: /<command>
+    aliases: cl
+  fly:
+    description: Allows player to enable fly or themselves or others.
+    usage: /<command>
+  gmc:
+    description: Changes player's, or other's gamemode to creative.
+    usage: /<command>
+  gms:
+    description: Changes player's, or other's gamemode to survival.
+    usage: /<command>
+  gma:
+    description: Changes player's, or other's gamemode to adventure.
+    usage: /<command>
+  gmsp:
+    description: Changes player's, or other's gamemode to spectator.
+    usage: /<command>
+  workbench:
+    description: Opens a crafting table interface.
+    usage: /<command>
+    aliases: wb
+  god:
+    description: Enables god mode.
+    usage: /<command>
+  enchant:
+    description: Allows enchanting of items.
+    usage: /<command>
+  jessentials:
+    description: Provides plugin information and ability to reload.
+    usage: /<command>
+    aliases: je
+  broadcast:
+    description: Broadcasts message.
+    usage: /<command>
+    aliases: bc
+  chatclear:
+    description: Clears chat for whole server or others.
+    usage: /<command>
+  enderchest:
+    description: Opens enderchest.
+    usage: /<command>
+    aliases: ec
+  motd:
+    description: Configure/view the message of the day.
+    usage: /<command>
+  exp:
+    description: Give EXP to player or others.
+    usage: /<command>
+    aliases: xp
+  sethome:
+    description: Set the player home.
+    usage: /<command>
+  delhome:
+    description: Delete a players home.
+    usage: /<command>
+    aliases: delh
+  home:
+    description: Teleports a player to their home.
+    usage: /<command>
+  hat:
+    description: Gives the player a sick new hat!
+    usage: /<command>
+    aliases: helmet
+  back:
+    description: Teleports the player to their death location.
+    usage: /<command>
+  invsee:
+    description: Allows a player to view another players inventory.
+    usage: /<command>
+    aliases: seeinv
+  item:
+    description: Allows a player to give themself an item.
+    usage: /<command>
+    aliases: i
+  kick:
+    description: Allows a player to kick another player.
+    usage: /<command>
+  kit:
+    description: Allows a player to get a predefined kit.
+    usage: /<command>
+  msg:
+    description: Allows a player to message another player.
+    usage: /<command>
+    aliases: [tell, whisper, m, t]
+  reply:
+    description: Allows a player to reply to another players message.
+    usage: /<command>
+    aliases: r
+  mute:
+    description: Allows muting all communication from a player.
+    usage: /<command>
+  nick:
+    description: Allows the player to add a custom display name.
+    usage: /<command>
+    aliases: nickreset
+  realname:
+    description: Allows the player to view another players actual name.
+    usage: /<command>
+  getpos:
+    description: Allows the player to view their coordinates.
+    usage: /<command>
+    aliases: getposition
+  repair:
+    description: Allows the player to repair items.
+    usage: /<command>
+    aliases: fix
+  setspawn:
+    description: Allows the player to define location of the spawn.
+    usage: /<command>
+  spawn:
+    description: Allows the player to teleported to the defined spawn.
+    usage: /<command>
+  setwarp:
+    description: Allows the player to set a warp.
+    usage: /<command>
+  delwarp:
+    description: Allows the player to delete a warp.
+    usage: /<command>
+  warp:
+    description: Allows the player to teleport to a specific warp.
+    usage: /<command>
+    aliases: warps
+  setworldspawn:
+    description: Allows the player to set the spawn of the world.
+    usage: /<command>
+    aliases: [worldspawnset, sws]
+  skull:
+    description: Allows the player to obtain the skull of another player.
+    usage: /<command>
+  tpa:
+    description: Allows requesting to teleport to other players.
+    usage: /<command>
+    aliases: [tpahere, tpdeny, tpaccept]
+  tptoggle:
+    description: Allows to disable or enable teleporting from other players.
+    usage: /<command>
+  tp:
+    description: Allows teleporting to players without needing a request.
+    usage: /<command>
+    aliases: teleport
+  tpo:
+    description: Allows teleporting to players regardless of any conditions.
+    usage: /<command>
+  tppos:
+    description: Allows teleporting to specific coordinates.
+    usage: /<command>
+    aliases: [tpposition, tpcoords]
+  kill:
+    description: Allows killing of players.
+    usage: /<command>
+    aliases: suicide
+  time:
+    description: Allows time to be set.
+    usage: /<command>
+    aliases: [day, night]
+  ptime:
+    description: Allows a player time to be set.
+    usage: /<command>
+    aliases: [pday, pnight]
+  weather:
+    description: Allows the player to change the weather.
+    usage: /<command>
+  vanish:
+    description: Allows the player to vanish.
+    usage: /<command>
+    aliases: v
+  ignore:
+    description: Allows player to ignore another player.
+    usage: /<command>
+  jhelp:
+    description: Information on plugin commands.
+    usage: /<command>
+  ban:
+    description: Bans the specified player.
+    usage: /<command>
+  unban:
+    description: Unbans specified player.
+    usage: /<command>
+    aliases: [pardon, unbanip]
+  banip:
+    description: Bans the specified IP.
+    usage: /<command>
+  tempban:
+    description: TempBans the specified player.
+    usage: /<command>
+  afk:
+    description: Define a player as AFK.
+    usage: /<command>
+  list:
+    description: Shows online players.
+    usage: /<command>
+    aliases: [online, playerlist, who, plist]
+  sudo:
+    description: Force another player to run something in their chat bar.
+    usage: /<command>
+  balance:
+    description: Checks a players balance.
+    usage: /<command>
+    aliases: [bal, money]
+  pay:
+    description: Pay another player.
+    usage: /<command>
+  baltop:
+    description: View the greatest balances on the server.
+    usage: /<command>
+    aliases: balancetop
+  me:
+    description: Broadcasts a players "action".
+    usage: /<command>
+  economy:
+    description: Modifys any player's balance.
+    usage: /<command>
+    aliases: eco
+  mail:
+    description: Send mail to other players.
+    usage: /<command>
+    aliases: email
+  socialspy:
+    description: See other players private messages.
+    usage: /<command>
+  speed:
+    description: Change your flying or walking speed.
+    usage: /<command>
+
+
+    
+
+    

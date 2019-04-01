@@ -1,0 +1,176 @@
+#-----------------------------------------#
+#                                         #
+#             Just Essentials             #
+#                                         #
+#-----------------------------------------#
+#                                         #
+#              Version 1.3.4              #
+#                                         #
+#-----------------------------------------#
+ 
+#-----------------------------------------#
+#                                         #
+#                Messages                 #
+#                                         #
+#-----------------------------------------#
+# --------------------------------
+#          IMPORTANT NOTE
+# --------------------------------
+# As of JEssentials V1.3.0, almost all messages can be configured in the lang.yml file.
+
+# -=- Command Messages -=-
+
+# Define the prefix for the command /broadcast
+
+broadcastPrefix: '&4[&aServer&4]'
+# Define the /msg format for sending and receiving messages.
+# %player%, and %message% variables can be used in this message.
+# NOTE: If you are confused on the difference between these two messages, view them in game.
+# It will make it much clearer on what these two messages represent.
+# IMPORTANT: For socialspy, the string "me" will be replaced with the player's name, so please use 'me' to represent the
+# player sending or receiving the message to avoid formatting issues.
+msgMessage-Sent: '&6[&cme &6-> &r%player%&6]&r %message%'
+msgMessage-Receive: '&6[&r%player% &6-> &cme&6]&r %message%'
+
+# Define message for when a tpa request is received.
+# %sender% variable can be used in this message.
+tpaMessage: 
+- '&6Tpa request received from &c%sender%'
+- '&6Use &c/tpaccept &6to accept the request.'
+- '&6use &c/tpdeny &6to deny the request.'
+# Define message for when a tpahere request is received
+# %sender% variable can be used in this message.
+tpaHereMessage: 
+- '&c%sender% &6would like you to teleport to their location.'
+- '&6Use &c/tpaccept &6to accept the request.'
+- '&6use &c/tpdeny &6to deny the request.'
+
+
+# -=- Other Messages -=-
+
+# Define join and leave messages for the server.
+
+joinMessage: '&e%player% has joined the game.'
+leaveMessage: '&e%player% has left the game.'
+
+# Define message for when a player joins for the first time
+
+firstJoinMessage: '&dWelcome %player% to the server for the first time!'
+
+
+# Define MOTD (message sent to player when they join.)
+motd: '&6Welcome to our server %player%!'
+
+
+# Change the server chat format here
+# VARIABLES: 
+# %player% - Player who sent the message.
+# %group% - Player's current group
+# %message% - The message the player sent.
+# %world% - The current player's world
+# %playerDisplay% - Uses the players nickname instead of their IGN name.
+
+chat-format: '%group% &f<%playerDisplay%> %message%'
+
+
+
+#-----------------------------------------#
+#                                         #
+#                Settings                 #
+#                                         #
+#-----------------------------------------#
+
+# Choose whether or not you want the startup message to be displayed in game-chat.
+# (Personally, I'd recommend disabling this. I only have it to remind you to report all bugs to the github!)
+
+enable-startupMessage: true
+
+# Enable/disable MOTD.
+enable-motd: true
+
+# Define how many homes players are allowed to set if they have the permission jessentials.sethome.multiple
+# NOTE: Do not use decimal numbers. This will return an error to console.
+homeNumber: 3
+
+# Choose whether to enable broadcasting when a player is banned.
+
+enable-broadcastBan: true
+
+# Choose to enable or disable broadcasting when a player is afk.
+
+enable-broadcastAfk: true
+
+# Choose to enable or disable automatically kicking a player when afk.
+
+enable-afkAutoKick: false
+# If the above is true, how long (in minutes) of the player being stationary until they are kicked?
+# NOTE: Do not use decimal numbers. This will return an error to console.
+afkKickTime: 15
+# Choose to enable or disable broadcasting ip-bans.
+
+enable-broadcastIpBan: true
+
+# Choose to enable or disable tp-safety, which will make it so a player, after teleporting, cannot take damage for X amount of seconds.
+#
+enable-tpSafety: true
+
+# How long the player should be protected after teleporting. (in seconds) if tpSafety is enabled.
+# NOTE: Do not use decimal numbers. This will return an error to console.
+tpSafetyLength: 3
+
+# Choose to enable or disable a delay when teleporting to protect players.
+
+enable-tpDelay: true
+
+# How long the delay will be when teleporting (in seconds).
+
+tpDelay: 3
+
+# Define how long a tpa request will take to time out (in seconds).
+# NOTE: Do not use decimal numbers. This will return an error to console.
+tpaRequestTimedOut: 60
+
+# Define all cooldowns for commands here
+# NOTE: Players with the jessentials.cooldown.bypass permission bypass these cooldowns
+# NOTE: The format for adding a command is: <command>, <cooldown in seconds>
+# Remove the '#' to enable the command cooldowns below
+
+commandCooldowns:
+  # - /heal, 180
+  # - /feed, 180
+  # - /repair, 180
+
+# Choose whether or not to automatically check for new updates.
+# NOTE: I highly recommend to keep this on, this plugin is constantly being updated.
+checkForUpdates: true
+
+
+#-----------------------------------------#
+#                                         #
+#               Permissions               #
+#                                         #
+#-----------------------------------------#
+
+# Define a custom permission prefix
+# EXAMPLE: The /msg permission is jessentials.msg
+# By changing the prefix, I could make it myservernamehere.msg
+# NOTE: You CANNOT use spaces or special characters. This will cause all permissions to not work properly.
+
+permissionPrefix: 'jessentials'
+
+
+#-----------------------------------------#
+#                                         #
+#                  Signs                  #
+#                                         #
+#-----------------------------------------#
+
+# Define all signs below. This is what the signs first line will change into when the player places a clickable sign.
+# NOTE: If the text you provide is too long to fit on a sign in-game, you will get an error to the console and the sign will not work.
+# (THIS DOES NOT INCLUDE COLOR CODES)
+
+healSign: '&a[Heal]'
+disposalSign: '&8[Disposal]'
+freeSign: '&1[Free]'
+warpSign: '&1[Warp]'
+kitSign: '&1[Kit]'
