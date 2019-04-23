@@ -107,7 +107,7 @@ public class Main extends JavaPlugin {
 	public static Long tpSafetyLength;
 	public static String teleportMessage;
 	public static BukkitScheduler scheduler;
-	public static File playerDataFile = new File("plugins/JEssentials", "playerdata.yml");
+	public static File playerDataFile = new File("plugins//JEssentials", "playerdata.yml");
     public static YamlConfiguration playerData = YamlConfiguration.loadConfiguration(playerDataFile);
     private static Chat chat = null;
     private static net.milkbowl.vault.permission.Permission permission = null;
@@ -118,8 +118,8 @@ public class Main extends JavaPlugin {
     public static boolean update;
     public static boolean economyEnabled;
     public static JavaPlugin plugin;
-    public static File lang;
-	public static YamlConfiguration language;
+    public static File lang = new File("plugins//JEssentials", "lang.yml");
+	public static YamlConfiguration language = YamlConfiguration.loadConfiguration(lang);
 	
 	
 	public void onEnable() {
@@ -456,8 +456,6 @@ public class Main extends JavaPlugin {
 		scheduler = getServer().getScheduler();
 		tpSafetyLength = getConfig().getInt("tpSafetyLength") * 20L;
 		permissionPrefix = getConfig().getString("permissionPrefix");
-		lang = new File(getDataFolder() + "\\" + "lang.yml");
-		language = YamlConfiguration.loadConfiguration(lang);
 		
 	}
 	
