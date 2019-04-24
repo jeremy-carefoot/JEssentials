@@ -36,8 +36,12 @@ public class playerChat implements Listener {
 			event.setMessage(event.getMessage().replaceAll("\\", "\\\\"));
 		}
 		String messageFormat = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("chat-format"));
-		String group = Main.getChat().getPrimaryGroup(p);
-		String pDisplayName = Main.getChat().getPlayerPrefix(p).replaceAll("&", "§") + p.getDisplayName() + Main.getChat().getPlayerSuffix(p).replaceAll("&", "§");
+		String group = "null";
+		String pDisplayName = "null";
+		try {
+		group = Main.getChat().getPrimaryGroup(p);
+		pDisplayName = Main.getChat().getPlayerPrefix(p).replaceAll("&", "§") + p.getDisplayName() + Main.getChat().getPlayerSuffix(p).replaceAll("&", "§");
+		} catch (Exception e) {}
 		messageFormat = messageFormat.replaceAll("%player%", p.getName().toString());
 		messageFormat = messageFormat.replaceAll("%playerDisplay%", pDisplayName);
 		messageFormat = messageFormat.replaceAll("%message%", event.getMessage());

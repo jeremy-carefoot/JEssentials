@@ -41,6 +41,7 @@ public class SetSpawn implements CommandExecutor {
 				spawn.set("Spawn.pitch", Double.valueOf(pitch));
 				spawn.set("Spawn.yaw", Double.valueOf(yaw));
 				p.sendMessage(api.getLangString("spawnSet"));
+				p.getWorld().setSpawnLocation(p.getLocation());
 				try {
 					spawn.save(spawnFile);
 				} catch (IOException e) {

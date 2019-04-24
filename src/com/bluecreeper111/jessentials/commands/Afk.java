@@ -188,7 +188,9 @@ public class Afk implements CommandExecutor, Listener {
 	}
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
-		Bukkit.getScheduler().cancelTask(afkmove.get(e.getPlayer()));
+		if (afkmove.containsKey(e.getPlayer())) {
+			Bukkit.getScheduler().cancelTask(afkmove.get(e.getPlayer()));
+		}
 		this.resetTimer(e.getPlayer());
 		if (api.getPlayerData().getBoolean(e.getPlayer().getName() + ".afk") == true) {
 			api.getPlayerData().set(e.getPlayer().getName() + ".afk", false);

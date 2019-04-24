@@ -22,7 +22,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import com.bluecreeper111.jessentials.api.JCommand;
+import com.bluecreeper111.jessentials.api.JEconomy;
 import com.bluecreeper111.jessentials.api.Language;
+import com.bluecreeper111.jessentials.api.VaultHook;
 import com.bluecreeper111.jessentials.api.teleportDelay;
 import com.bluecreeper111.jessentials.api.teleportSafety;
 import com.bluecreeper111.jessentials.commands.Afk;
@@ -94,9 +96,8 @@ import com.bluecreeper111.jessentials.signs.warpSign;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 
-
 public class Main extends JavaPlugin {
-	
+
 	public static String noPermissionMessage;
 	public static String notPlayerMessage;
 	public static String playerNotFound;
@@ -108,20 +109,21 @@ public class Main extends JavaPlugin {
 	public static String teleportMessage;
 	public static BukkitScheduler scheduler;
 	public static File playerDataFile = new File("plugins//JEssentials", "playerdata.yml");
-    public static YamlConfiguration playerData = YamlConfiguration.loadConfiguration(playerDataFile);
-    private static Chat chat = null;
-    private static net.milkbowl.vault.permission.Permission permission = null;
-    private static Economy economy = null;
-    public String checkedVersion = "";
-    public double returnedVersion = 0.0D;
-    public double currentVersion = 0.0D;
-    public static boolean update;
-    public static boolean economyEnabled;
-    public static JavaPlugin plugin;
-    public static File lang = new File("plugins//JEssentials", "lang.yml");
+	public static YamlConfiguration playerData = YamlConfiguration.loadConfiguration(playerDataFile);
+	private static Chat chat = null;
+	private static net.milkbowl.vault.permission.Permission permission = null;
+	public JEconomy economyImplementer;
+	private VaultHook vaulthook;
+	private static Economy economy = null;
+	public String checkedVersion = "";
+	public double returnedVersion = 0.0D;
+	public double currentVersion = 0.0D;
+	public static boolean update;
+	public static boolean economyEnabled;
+	public static JavaPlugin plugin;
+	public static File lang = new File("plugins//JEssentials", "lang.yml");
 	public static YamlConfiguration language = YamlConfiguration.loadConfiguration(lang);
-	
-	
+
 	public void onEnable() {
 		Logger logger = Bukkit.getLogger();
 		PluginDescriptionFile pdfFile = this.getDescription();
@@ -129,6 +131,11 @@ public class Main extends JavaPlugin {
 		logger.info("[JEssentials] -VERSION- Running version V." + pdfFile.getVersion());
 		logger.info("[JEssentials] -INFO- Please submit all bugs to the github! Project is in early stages!");
 		registerCommands();
+		economyImplementer = new JEconomy();
+		vaulthook = new VaultHook(this);
+		if (getConfig().getBoolean("enable-economy")) {
+			vaulthook.hook();
+		}
 		setupChat();
 		setupPermissions();
 		setupEconomy();
@@ -158,16 +165,15 @@ public class Main extends JavaPlugin {
 		saveDefaultConfig();
 		registerPermissions();
 		loadMetrics();
-		
 	}
-	
+
 	public void onDisable() {
 		Logger logger = Bukkit.getLogger();
-		
+		vaulthook.unhook();
 		logger.info("[JEssentials] -INFO- has been disabled with no errors.");
-		
+
 	}
-	
+
 	public void registerCommands() {
 		getCommand("heal").setExecutor(new Heal());
 		getCommand("feed").setExecutor(new Feed());
@@ -227,7 +233,7 @@ public class Main extends JavaPlugin {
 		getCommand("tempban").setExecutor(new TempBan(this));
 		getCommand("afk").setExecutor(new Afk(this));
 	}
-	
+
 	public void registerEvents() {
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(new playerGamemode(), this);
@@ -247,9 +253,9 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new kitSign(this), this);
 		pm.registerEvents(new Mail(), this);
 		pm.registerEvents(new commandCooldown(this), this);
-		
+
 	}
-	
+
 	public void registerPermissions() {
 		PluginManager pm = Bukkit.getPluginManager();
 		String prefix = getConfig().getString("permissionPrefix");
@@ -418,26 +424,23 @@ public class Main extends JavaPlugin {
 		pm.addPermission(new Permission(prefix + ".cooldown.bypass.*"));
 		pm.addPermission(new Permission(prefix + ".kit.setdelay"));
 		pm.addPermission(new Permission(prefix + ".kit.delay.bypass.*"));
-		
-		
-		
-		
+
 	}
-	
+
 	public void saveDefaultConfig() {
-        if (!new File(getDataFolder(), "config.yml").exists()) {
-            saveResource("config.yml", false);
-        }
-        if (!Main.playerDataFile.exists()) {
+		if (!new File(getDataFolder(), "config.yml").exists()) {
+			saveResource("config.yml", false);
+		}
+		if (!Main.playerDataFile.exists()) {
 			try {
 				Main.playerDataFile.createNewFile();
 				Main.playerData.save(Main.playerDataFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
-        if (!lang.exists()) {
+		if (!lang.exists()) {
 			try {
 				lang.createNewFile();
 				Language.addStrings();
@@ -447,58 +450,72 @@ public class Main extends JavaPlugin {
 				e.printStackTrace();
 			}
 		}
-        
-    }
-	
+		if (!JEconomy.econ.exists()) {
+			try {
+				JEconomy.econ.createNewFile();
+				JEconomy.economy.save(JEconomy.econ);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public void registerApiStrings() {
 		tpDelay = getConfig().getInt("tpDelay") * 20L;
 		tpDelayEnable = getConfig().getBoolean("enable-tpDelay");
 		scheduler = getServer().getScheduler();
 		tpSafetyLength = getConfig().getInt("tpSafetyLength") * 20L;
 		permissionPrefix = getConfig().getString("permissionPrefix");
-		
+
 	}
-	
+
 	public void loadMetrics() {
 		Metrics metrics = new Metrics(this);
-	    metrics.addCustomChart(new Metrics.SimplePie("used_language", new Callable<String>() {
-	        @Override
-	        public String call() throws Exception {
-	            return getConfig().getString("language", "en");
-	        }
-	    }));
+		metrics.addCustomChart(new Metrics.SimplePie("used_language", new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				return getConfig().getString("language", "en");
+			}
+		}));
 	}
+
 	private boolean setupChat() {
 		try {
-		RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
-		try {
-			chat = rsp.getProvider();
+			RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
+			try {
+				chat = rsp.getProvider();
 			} catch (Exception e) {
-				getLogger().severe("-ERROR- No permissions plugin found! Please install one, or groups in chat will not work!");
+				getLogger().severe(
+						"-ERROR- No permissions plugin found! Please install one, or groups in chat will not work!");
 				return true;
 			}
-		return true;
+			return true;
 		} catch (NoClassDefFoundError e) {
 			e.printStackTrace();
-		return false;
+			return false;
 		}
 	}
+
 	private boolean setupPermissions() {
 		try {
-		RegisteredServiceProvider<net.milkbowl.vault.permission.Permission> rsp = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
-		permission = rsp.getProvider();
-		return true;
+			RegisteredServiceProvider<net.milkbowl.vault.permission.Permission> rsp = getServer().getServicesManager()
+					.getRegistration(net.milkbowl.vault.permission.Permission.class);
+			permission = rsp.getProvider();
+			return true;
 		} catch (NoClassDefFoundError e) {
 			e.printStackTrace();
-		return false;
+			return false;
 		}
 	}
+
 	public static Chat getChat() {
 		return chat;
 	}
+
 	public static net.milkbowl.vault.permission.Permission getPermissions() {
 		return permission;
 	}
+
 	public double updateCheck(double currentVersion) {
 		try {
 			URL url = new URL("https://servermods.forgesvc.net/servermods/files?projectids=316204");
@@ -507,21 +524,24 @@ public class Main extends JavaPlugin {
 			connect.setDoOutput(true);
 			BufferedReader read = new BufferedReader(new InputStreamReader(connect.getInputStream()));
 			String respond = read.readLine();
-			JSONArray array = (JSONArray)JSONValue.parse(respond);
+			JSONArray array = (JSONArray) JSONValue.parse(respond);
 			if (array.size() == 0) {
 				Bukkit.getLogger().warning("[JEssentials] No files found, Could be an error with CurseForge API.");
 				return currentVersion;
 			}
-			checkedVersion = ((String)((JSONObject)array.get(array.size() - 1)).get("name")).replace("JEssentials V", "").trim();
-			return Double.valueOf(checkedVersion.replaceFirst("1.", "").trim().replace(" (Rebrand Update)", "")).doubleValue();
-			
+			checkedVersion = ((String) ((JSONObject) array.get(array.size() - 1)).get("name"))
+					.replace("JEssentials V", "").trim();
+			return Double.valueOf(checkedVersion.replaceFirst("1.", "").trim().replace(" (Rebrand Update)", ""))
+					.doubleValue();
+
 		} catch (Exception e) {
 			Bukkit.getLogger().severe("[JEssentials] Failed to check for a new update.");
 			e.printStackTrace();
 			return 0.0;
 		}
-		
+
 	}
+
 	public boolean setupEconomy() {
 		try {
 			RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
@@ -533,12 +553,13 @@ public class Main extends JavaPlugin {
 			economy = rsp.getProvider();
 			economyEnabled = true;
 			return true;
-			} catch (NoClassDefFoundError e) {
-				e.printStackTrace();
-				economyEnabled = false;
+		} catch (NoClassDefFoundError e) {
+			e.printStackTrace();
+			economyEnabled = false;
 			return false;
-			}
+		}
 	}
+
 	public static Economy getEconomy() {
 		return economy;
 	}

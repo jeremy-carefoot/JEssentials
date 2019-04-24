@@ -121,7 +121,7 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/pay §7- Pays a player money. ");
 	        sender.sendMessage("§e/baltop §7- Shows all top balances on the server.");
 	        sender.sendMessage("§e/economy §7- Change any players balance.");
-	        sender.sendMessage("§cNOTE: All commands on this page require a Vault-supported economy plugin.");
+	        sender.sendMessage(" ");
 	        sender.sendMessage("§8------------------§6Page 13/14§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("14")) {

@@ -4,7 +4,7 @@
 #                                         #
 #-----------------------------------------#
 #                                         #
-#              Version 1.3.5              #
+#              Version 1.3.6              #
 #                                         #
 #-----------------------------------------#
  
@@ -84,6 +84,9 @@ chat-format: '%group% &f<%playerDisplay%> %message%'
 # (Personally, I'd recommend disabling this. I only have it to remind you to report all bugs to the github!)
 
 enable-startupMessage: true
+
+# Choose whether or not to use JEssentials integrated economy
+enable-economy: true
 
 # Enable/disable MOTD.
 enable-motd: true

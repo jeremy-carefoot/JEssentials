@@ -48,10 +48,10 @@ public class Baltop extends JCommand {
 			String text = "";
 			for (Double balance : balances) {
 				if (page.get(balance) == 1) {
-					text = text + standing.get(balance) + ". " + manager.get(balance) + ": " + Double.toString(balance) + display + " \n";
+					text = text + standing.get(balance) + ". " + manager.get(balance) + ": " + Double.toString(balance) + display + "\n";
 				}
 			}
-			p.sendMessage(api.getLangString("balTopHeader") + "§r\n" + text + api.getLangString("balTopBottom").replaceAll("%page%", "1"));
+			p.sendMessage(api.getLangString("balTopHeader") + "§r\n" + text.replace("\\", "") + api.getLangString("balTopBottom").replaceAll("%page%", "1"));
 			return;
 			} else if (api.isInt(args[0])) {
 				int argsPage = Integer.parseInt(args[0]);
@@ -59,10 +59,10 @@ public class Baltop extends JCommand {
 					String text = "";
 					for (Double balance : balances) {
 						if (page.get(balance) == argsPage) {
-							text = text + standing.get(balance) + ". " + manager.get(balance) + ": " + Double.toString(balance) + display + " \n";
+							text = text + standing.get(balance) + ". " + manager.get(balance) + ": " + Double.toString(balance) + display + "\n";
 						}
 					}
-					p.sendMessage(api.getLangString("balTopHeader") + "§r\n" + text + api.getLangString("balTopBottom").replaceAll("%page%", Integer.toString(argsPage)));
+					p.sendMessage(api.getLangString("balTopHeader") + "§r\n" + text.replace("\\", "") + api.getLangString("balTopBottom").replaceAll("%page%", Integer.toString(argsPage)));
 					return;
 				} else {
 					p.sendMessage(api.getLangString("balTopNoPage"));

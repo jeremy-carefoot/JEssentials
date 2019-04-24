@@ -26,6 +26,10 @@ public class Balance extends JCommand {
 
 	
 	public void execute(CommandSender sender, Command cmd, String label, String[] args) {
+		if (Main.economyEnabled == false) {
+			sender.sendMessage(api.getLangString("noEconomy"));
+			return;
+		}
 		String display = Main.getEconomy().currencyNameSingular();
 		if (!(sender instanceof Player)) {
 			if (args.length != 1) {
