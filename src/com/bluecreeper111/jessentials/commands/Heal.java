@@ -13,6 +13,7 @@ import com.bluecreeper111.jessentials.api.api;
 
 public class Heal implements CommandExecutor {
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		
 		Logger logger = Bukkit.getLogger();

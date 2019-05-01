@@ -46,6 +46,7 @@ public class Msg implements CommandExecutor {
 					api.incorrectSyntax(p, "/" + label.toString() + " <player> <message>");
 					return true;
 				} else {
+					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getPlayerExact(args[0]);
 					if (target == null) {
 						api.pNotFound(p, args[0]);
@@ -74,7 +75,7 @@ public class Msg implements CommandExecutor {
 						}
 						if (Socialspy.socialSpying.size() > 0) {
 							for (Player spy : Socialspy.socialSpying) {
-								spy.sendMessage(api.getLangString("ssMessage").replaceAll("%msg%", msgMessageSent.replaceAll("%player%", target.getDisplayName()).replaceAll("%message%", msg).replaceAll("me", p.getName())));
+								spy.sendMessage(api.getLangString("ssMessage").replaceAll("%message%", msgMessageSent.replaceAll("%player%", target.getDisplayName()).replaceAll("%message%", msg).replaceAll("me", p.getName())));
 							}
 						}
 						target.sendMessage(msgMessageReceived.replaceAll("%player%", p.getDisplayName()).replaceAll("%message%", msg));

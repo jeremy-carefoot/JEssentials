@@ -25,6 +25,7 @@ public class Pay extends JCommand {
 	}
 
 	
+	@SuppressWarnings("deprecation")
 	public void execute(CommandSender sender, Command cmd, String label, String[] args) {
 		String payMessage = api.getLangString("payMessage");
 		String payMessage2 = api.getLangString("receivePay");

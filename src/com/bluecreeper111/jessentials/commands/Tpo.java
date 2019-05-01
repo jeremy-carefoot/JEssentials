@@ -14,6 +14,7 @@ import com.bluecreeper111.jessentials.api.api;
 public class Tpo implements CommandExecutor {
 
 	
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (!(sender instanceof Player)) {
 			Logger logger = Bukkit.getLogger();

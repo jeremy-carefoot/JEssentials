@@ -20,6 +20,7 @@ public class Ban implements CommandExecutor {
 	}
 	
 	
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		BanList bans = Bukkit.getBanList(BanList.Type.NAME);
 		String banBroadcast = api.getLangString("banBroadcast");

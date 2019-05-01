@@ -1,5 +1,6 @@
 package com.bluecreeper111.jessentials.commands;
 
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,7 +27,7 @@ public class Repair implements CommandExecutor {
 			} else {
 				if (args.length == 0) {
 					ItemStack item = p.getInventory().getItemInMainHand();
-					if (item == null) {
+					if (item == null || item.getType() == Material.AIR) {
 						p.sendMessage(api.getLangString("mustHoldItem"));
 						return true; 
 					}
@@ -41,7 +42,7 @@ public class Repair implements CommandExecutor {
 						return true;
 					} else {
 						for (int i = 0; i < p.getInventory().getSize(); i++) {
-							if (!(p.getInventory().getItem(i) == null)) {
+							if (!(p.getInventory().getItem(i) == null) && p.getInventory().getItem(i).getType() != Material.AIR) {
 								p.getInventory().getItem(i).setDurability((short) 0);
 								if (i == p.getInventory().getSize())
 									break;

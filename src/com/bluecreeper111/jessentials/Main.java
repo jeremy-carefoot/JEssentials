@@ -105,6 +105,7 @@ public class Main extends JavaPlugin {
 	public static String permissionPrefix;
 	public static Long tpDelay;
 	public static boolean tpDelayEnable;
+	public static boolean pApi;
 	public static Long tpSafetyLength;
 	public static String teleportMessage;
 	public static BukkitScheduler scheduler;
@@ -135,6 +136,13 @@ public class Main extends JavaPlugin {
 		vaulthook = new VaultHook(this);
 		if (getConfig().getBoolean("enable-economy")) {
 			vaulthook.hook();
+		}
+		if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+			getLogger().info("-INFO- PlaceholderAPI has been sucessfully hooked.");
+			pApi = true;
+		} else {
+			getLogger().warning("-WARNING- PlaceholderAPI was not found. Features involving PlaceholderAPI will not correctly function.");
+			pApi = false;
 		}
 		setupChat();
 		setupPermissions();
@@ -485,8 +493,7 @@ public class Main extends JavaPlugin {
 			try {
 				chat = rsp.getProvider();
 			} catch (Exception e) {
-				getLogger().severe(
-						"-ERROR- No permissions plugin found! Please install one, or groups in chat will not work!");
+				getLogger().warning("-WARNING- Permissions plugin not found. Some features may not work.");
 				return true;
 			}
 			return true;

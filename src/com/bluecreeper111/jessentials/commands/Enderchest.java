@@ -10,6 +10,7 @@ import com.bluecreeper111.jessentials.api.api;
 
 public class Enderchest implements CommandExecutor {
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		String enderchestMessage = api.getLangString("enderchestMessage");
 		if (!(sender instanceof Player)) {

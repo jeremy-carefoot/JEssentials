@@ -21,6 +21,7 @@ public class Speed extends JCommand {
 				api.incorrectSyntaxConsole("/speed <player> <speed>");
 				return;
 			} else {
+				@SuppressWarnings("deprecation")
 				Player target = Bukkit.getPlayerExact(args[0]);
 				if (target == null) {
 					api.pNotFoundConsole(args[0]);
@@ -87,6 +88,7 @@ public class Speed extends JCommand {
 					api.noPermission(p);
 					return;
 				} else {
+					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getPlayerExact(args[0]);
 					if (target == null) {
 						api.pNotFound(p, args[0]);

@@ -11,6 +11,8 @@ import org.bukkit.entity.Player;
 import com.bluecreeper111.jessentials.Main;
 import com.bluecreeper111.jessentials.api.api;
 
+import me.clip.placeholderapi.PlaceholderAPI;
+
 public class Motd implements CommandExecutor {
 
 	private Main plugin;
@@ -24,7 +26,8 @@ public class Motd implements CommandExecutor {
 		if (args.length == 0) {
 			if (!(sender instanceof Player)) {
 				Logger logger = Bukkit.getLogger();
-				logger.info(motd.replaceAll("%player%", "console"));
+				motd = motd.replaceAll("%player%", "console");
+				logger.info(motd);
 				return true;
 			} else {
 				Player p = (Player) sender;
@@ -32,7 +35,11 @@ public class Motd implements CommandExecutor {
 					api.noPermission(p);
 					return true;
 				} else {
-					p.sendMessage(motd.replaceAll("%player%", p.getName().toString()));
+					motd = motd.replaceAll("%player%", p.getName().toString());
+					if (Main.pApi) {
+						motd = PlaceholderAPI.setPlaceholders(p, motd);
+					}
+					p.sendMessage(motd);
 					return true;
 				}
 			}

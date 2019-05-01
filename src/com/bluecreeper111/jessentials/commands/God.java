@@ -22,6 +22,7 @@ public class God implements CommandExecutor, Listener {
 
 	private static List<Player> god = new ArrayList<>();
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
 		Logger logger = Bukkit.getLogger();

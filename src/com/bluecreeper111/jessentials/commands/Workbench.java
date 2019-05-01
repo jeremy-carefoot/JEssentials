@@ -27,7 +27,7 @@ public class Workbench implements CommandExecutor {
 				Inventory craft = Bukkit.createInventory(player, InventoryType.WORKBENCH);
 				player.openInventory(craft);
 				player.openWorkbench(null, true);
-				player.sendMessage(api.getLangString("workbenchOpened"));
+				player.sendMessage(api.getLangString("workbenchMessage"));
 				return true;
 			}
 			

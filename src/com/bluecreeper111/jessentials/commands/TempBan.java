@@ -72,6 +72,7 @@ public class TempBan implements CommandExecutor {
 					api.incorrectSyntaxConsole("/tempban <player> <time>");
 					return true;
 				} else {
+					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getPlayerExact(args[0]);
 					if (target == null) {
 						api.pNotFoundConsole(args[0]);
@@ -123,6 +124,10 @@ public class TempBan implements CommandExecutor {
 					api.noPermission(p);
 					return true;
 				} else {
+					if(!(args.length > 2)) {
+						api.incorrectSyntax(p, "/tempban <player> <time>");
+					}
+					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getPlayerExact(args[0]);
 					if (target == null) {
 						api.pNotFound(p, args[0]);

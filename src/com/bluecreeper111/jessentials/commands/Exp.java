@@ -21,6 +21,7 @@ public class Exp implements CommandExecutor {
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		String expMessage = api.getLangString("expMessage");
 		if (!(sender instanceof Player)) {

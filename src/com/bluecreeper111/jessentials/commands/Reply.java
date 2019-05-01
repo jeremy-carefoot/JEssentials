@@ -67,7 +67,7 @@ public class Reply implements CommandExecutor {
 						}
 						if (Socialspy.socialSpying.size() > 0) {
 							for (Player spy : Socialspy.socialSpying) {
-								spy.sendMessage(api.getLangString("ssMessage").replaceAll("%msg%", msgMessageSent.replaceAll("%player%", target.getDisplayName()).replaceAll("%message%", msg).replaceAll("me", p.getName())));
+								spy.sendMessage(api.getLangString("ssMessage").replaceAll("%message%", msgMessageSent.replaceAll("%player%", target.getDisplayName()).replaceAll("%message%", msg).replaceAll("me", p.getName())));
 							}
 						}
 

@@ -20,6 +20,7 @@ public class Sudo extends JCommand {
 		String sudo = api.getLangString("sudoMessage");
 		if (!(sender instanceof Player)) {
 			if (args.length > 1) {
+				@SuppressWarnings("deprecation")
 				Player target = Bukkit.getPlayerExact(args[0]);
 				if (target == null) {
 					api.pNotFoundConsole(args[0]);
@@ -54,6 +55,7 @@ public class Sudo extends JCommand {
 					api.incorrectSyntax(p, "/sudo <player> [command]");
 					return;
 				} else {
+					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getPlayerExact(args[0]);
 					if (target == null) {
 						api.pNotFound(p, args[0]);

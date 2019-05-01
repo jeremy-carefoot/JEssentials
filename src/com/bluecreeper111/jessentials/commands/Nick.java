@@ -18,6 +18,7 @@ public class Nick implements CommandExecutor {
 	
 	public static HashMap<String, Player> realname = new HashMap<String, Player>();
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		String nickMessage = api.getLangString("nickMessage");
 		if (!(sender instanceof Player)) {

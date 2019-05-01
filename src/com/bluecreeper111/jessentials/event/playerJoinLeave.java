@@ -15,6 +15,8 @@ import com.bluecreeper111.jessentials.api.api;
 import com.bluecreeper111.jessentials.commands.Msg;
 import com.bluecreeper111.jessentials.commands.Nick;
 
+import me.clip.placeholderapi.PlaceholderAPI;
+
 
 public class playerJoinLeave implements Listener {
 	
@@ -50,7 +52,11 @@ public class playerJoinLeave implements Listener {
 		api.getPlayerData().set(e.getPlayer().getName() + ".afk", false);
 		api.savePlayerData();
 		Msg.recentMessage.remove(e.getPlayer().getName());
-		e.setJoinMessage(joinMessage.replaceAll("%player%", e.getPlayer().getName().toString()));
+		joinMessage = joinMessage.replaceAll("%player%", e.getPlayer().getName().toString());
+		if(Main.pApi) {
+			joinMessage = PlaceholderAPI.setPlaceholders(e.getPlayer(), joinMessage);
+		}
+		e.setJoinMessage(joinMessage);
 		if (nick == null) {
 			api.getPlayerData().set(e.getPlayer().getName() + ".nick", e.getPlayer().getName());
 			api.savePlayerData();
@@ -61,7 +67,11 @@ public class playerJoinLeave implements Listener {
 		}
 		Nick.realname.put(realnameKey, e.getPlayer());
 		if (plugin.getConfig().getBoolean("enable-motd") == true) {
-			e.getPlayer().sendMessage(motd.replaceAll("%player%", e.getPlayer().getDisplayName()));
+			motd = motd.replaceAll("%player%", e.getPlayer().getDisplayName());
+			if (Main.pApi) {
+			motd = PlaceholderAPI.setPlaceholders(e.getPlayer(), motd);
+			}
+			e.getPlayer().sendMessage(motd);
 		}
 		if (e.getPlayer().hasPermission(api.perp() + ".*")) {
 			for (Permission permission : Bukkit.getPluginManager().getPermissions()) {
@@ -77,7 +87,11 @@ public class playerJoinLeave implements Listener {
 	public void playerLeave(PlayerQuitEvent e) {
 		String leaveMessage = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("leaveMessage"));
 		Msg.recentMessage.remove(e.getPlayer().getName());
-		e.setQuitMessage(leaveMessage.replaceAll("%player%", e.getPlayer().getName().toString()));
+		leaveMessage = leaveMessage.replaceAll("%player%", e.getPlayer().getName().toString());
+		if (Main.pApi) {
+			leaveMessage = PlaceholderAPI.setPlaceholders(e.getPlayer(), leaveMessage);
+		}
+		e.setQuitMessage(leaveMessage);
 		if (e.getPlayer().hasPermission(api.perp() + ".*")) {
 			for (Permission permission : Bukkit.getPluginManager().getPermissions()) {
 				Main.getPermissions().playerRemove(e.getPlayer(), permission.getName());

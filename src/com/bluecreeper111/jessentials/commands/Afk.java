@@ -27,6 +27,7 @@ public class Afk implements CommandExecutor, Listener {
 	
 	public HashMap<Player, Integer> afkmove = new HashMap<Player, Integer>();
 	
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		boolean broadcastAfkEnable = plugin.getConfig().getBoolean("enable-broadcastAfk");
 		String afkBroadcast = api.getLangString("afkBroadcast");
@@ -147,6 +148,7 @@ public class Afk implements CommandExecutor, Listener {
 		long kickTime = (plugin.getConfig().getInt("afkKickTime")) * 1200L;
 		afkmove.put(p, Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 
+			@SuppressWarnings("deprecation")
 			@Override
 			public void run() {
 				if (Bukkit.getPlayerExact(p.getName()) == null) {

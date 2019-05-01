@@ -50,7 +50,7 @@ public class Language {
 		Main.language.addDefault("l.enchantMessage", "&2Your item has been enchanted.");
 		Main.language.addDefault("l.mustHoldItem", "&cYou must hold an item!");
 		Main.language.addDefault("l.enchantNotFound", "&cThat enchantment was not found!");
-		Main.language.addDefault("l.enchantOutOfBounds", "&cThat enchantment level is out of bounds! It can support enchants up to %max.");
+		Main.language.addDefault("l.enchantOutOfBounds", "&cThat enchantment level is out of bounds! It can support enchants up to %max%.");
 		Main.language.addDefault("l.enchantNotCompatible", "&cThat item does not support that enchantment!");
 		Main.language.addDefault("l.enderchestMessage", "&5Enderchest opened!");
 		Main.language.addDefault("l.enderchestOthers", "&dOpened %player%'s enderchest!");
@@ -80,8 +80,8 @@ public class Language {
 		Main.language.addDefault("l.noHome", "&cYou do not have a home!");
 		Main.language.addDefault("l.homeNumber", "&6Number of homes: ");
 		Main.language.addDefault("l.homeNotFound", "&cHome %home% not found!");
-		Main.language.addDefault("l.ignoreMessage", "&6Player &c%player%&r has been ignored.");
-		Main.language.addDefault("l.ignoreMessageNo", "&6Player &c%player%&r is no long being ignored.");
+		Main.language.addDefault("l.ignoreMessage", "&6Player &c%player%&r &6has been ignored.");
+		Main.language.addDefault("l.ignoreMessageNo", "&6Player &c%player%&r &6is no long being ignored.");
 		Main.language.addDefault("l.invSeeMessage", "&6Player &c%player%&r's inventory has been opened.");
 		Main.language.addDefault("l.invSeeOwn", "&cCannot invsee your own inventory!");
 		Main.language.addDefault("l.itemMessage", "&6You have received &c%item%&6!");

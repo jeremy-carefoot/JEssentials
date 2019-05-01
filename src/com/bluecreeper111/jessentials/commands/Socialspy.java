@@ -38,6 +38,7 @@ public class Socialspy extends JCommand {
 				api.noPermission(p);
 				return;
 			} else {
+				@SuppressWarnings("deprecation")
 				Player target = Bukkit.getPlayerExact(args[0]);
 				if (target == null) {
 					api.pNotFound(p, args[0]);

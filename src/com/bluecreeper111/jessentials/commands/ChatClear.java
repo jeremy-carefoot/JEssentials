@@ -11,6 +11,7 @@ import com.bluecreeper111.jessentials.api.api;
 public class ChatClear implements CommandExecutor {
 
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		String chatClear = api.getLangString("chatClear");
 

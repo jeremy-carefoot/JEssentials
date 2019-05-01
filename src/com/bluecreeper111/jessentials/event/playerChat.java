@@ -13,6 +13,8 @@ import com.bluecreeper111.jessentials.Main;
 import com.bluecreeper111.jessentials.api.api;
 import com.bluecreeper111.jessentials.commands.Mute;
 
+import me.clip.placeholderapi.PlaceholderAPI;
+
 public class playerChat implements Listener {
 
 	private Main plugin;
@@ -38,15 +40,17 @@ public class playerChat implements Listener {
 		String messageFormat = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("chat-format"));
 		String group = "null";
 		String pDisplayName = "null";
-		try {
 		group = Main.getChat().getPrimaryGroup(p);
 		pDisplayName = Main.getChat().getPlayerPrefix(p).replaceAll("&", "§") + p.getDisplayName() + Main.getChat().getPlayerSuffix(p).replaceAll("&", "§");
-		} catch (Exception e) {}
+		String prefix = Main.getChat().getGroupPrefix(p.getWorld().getName(), group);
 		messageFormat = messageFormat.replaceAll("%player%", p.getName().toString());
-		messageFormat = messageFormat.replaceAll("%playerDisplay%", pDisplayName);
+		messageFormat = messageFormat.replaceAll("%playerDisplay%", pDisplayName != null ? pDisplayName : p.getDisplayName());
 		messageFormat = messageFormat.replaceAll("%message%", event.getMessage());
 		messageFormat = messageFormat.replaceAll("%world%", p.getWorld().getName());
-		messageFormat = messageFormat.replaceAll("%group%", api.translateColor(Main.getChat().getGroupPrefix(p.getWorld().getName(), group)));
+		messageFormat = messageFormat.replaceAll("%group%", api.translateColor(prefix != null ? prefix : ""));
+		if (Main.pApi) {
+		messageFormat = PlaceholderAPI.setPlaceholders(p, messageFormat);
+		}
 		event.setFormat(messageFormat);
 		if (Mute.muted.contains(p.getName())) {
 			p.sendMessage(api.getLangString("muted"));

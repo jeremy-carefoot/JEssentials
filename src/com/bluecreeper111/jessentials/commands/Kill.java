@@ -12,6 +12,7 @@ import com.bluecreeper111.jessentials.api.api;
 
 public class Kill implements CommandExecutor {
 	
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		String killMessage = api.getLangString("killMessageSender");
 		String suicideMessage = api.getLangString("suicideMessage");

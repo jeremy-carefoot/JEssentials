@@ -21,6 +21,7 @@ public class Back implements CommandExecutor {
 		plugin = pl;
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (!(sender instanceof Player)) {
 			Logger logger = Bukkit.getLogger();

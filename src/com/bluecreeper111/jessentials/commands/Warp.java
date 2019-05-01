@@ -59,6 +59,7 @@ public class Warp implements CommandExecutor {
 				api.incorrectSyntaxConsole("/warp <player> <warp>");
 				return true;
 			} else {
+				@SuppressWarnings("deprecation")
 				Player target = Bukkit.getPlayerExact(args[0]);
 				if (target == null) {
 					api.pNotFoundConsole(args[0]);
@@ -93,7 +94,7 @@ public class Warp implements CommandExecutor {
 			} else {
 				if (label.equalsIgnoreCase("warps") || args.length == 0) {
 					if (p.hasPermission(api.perp() + ".warp.list")) {
-						if (!SetWarp.warps.getConfigurationSection("Warps").getKeys(false).isEmpty() || !(SetWarp.warps.getConfigurationSection("Warps") == null)) {
+						if (!(SetWarp.warps.getConfigurationSection("Warps") == null) && !SetWarp.warps.getConfigurationSection("Warps").getKeys(false).isEmpty()) {
 							String text = "";
 							for (String warps : SetWarp.warps.getConfigurationSection("Warps").getKeys(false)) {
 								text = text + warps + ", ";
@@ -137,6 +138,7 @@ public class Warp implements CommandExecutor {
 						api.noPermission(p);
 						return true;
 					} else {
+						@SuppressWarnings("deprecation")
 						Player target = Bukkit.getPlayerExact(args[0]);
 						if (target == null) {
 							api.pNotFound(p, args[0]);

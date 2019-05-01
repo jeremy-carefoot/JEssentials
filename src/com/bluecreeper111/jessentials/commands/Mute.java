@@ -31,6 +31,7 @@ public class Mute implements CommandExecutor {
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		BukkitScheduler timer = plugin.getServer().getScheduler();
 		String mutedMessage = api.getLangString("muted");

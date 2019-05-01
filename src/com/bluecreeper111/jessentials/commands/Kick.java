@@ -22,6 +22,7 @@ public class Kick implements CommandExecutor {
 				api.incorrectSyntaxConsole("/kick <player> [message]");
 				return true;
 			} else if (args.length > 1) {
+				@SuppressWarnings("deprecation")
 				Player target = Bukkit.getPlayerExact(args[0]);
 				if (target == null) {
 					api.pNotFoundConsole(args[0]);
@@ -59,6 +60,7 @@ public class Kick implements CommandExecutor {
 				api.incorrectSyntax(p, "/kick <player> [message]");
 				return true;
 			} else if (args.length > 1) {
+				@SuppressWarnings("deprecation")
 				Player target = Bukkit.getPlayerExact(args[0]);
 				if (target == null) {
 					api.pNotFound(p, args[0]);

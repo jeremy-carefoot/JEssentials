@@ -33,6 +33,7 @@ public class Invsee implements CommandExecutor {
 					p.sendMessage(api.getLangString("invSeeOwn"));
 					return true;
 				} else {
+					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getPlayerExact(args[0]);
 					if (target == null) {
 						api.pNotFound(p, args[0]);

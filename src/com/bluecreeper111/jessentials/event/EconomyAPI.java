@@ -56,6 +56,7 @@ public class EconomyAPI implements Economy {
 
 	@Override
 	public boolean createPlayerAccount(String playerName) {
+		@SuppressWarnings("deprecation")
 		UUID id = Bukkit.getPlayer(playerName).getUniqueId();
 		if (id == null) { return false; }
 		if (playerbank.containsKey(id)) {
@@ -101,6 +102,7 @@ public class EconomyAPI implements Economy {
 
 	@Override
 	public EconomyResponse depositPlayer(String playerName, double amount) {
+		@SuppressWarnings("deprecation")
 		UUID id = Bukkit.getPlayer(playerName).getUniqueId();
 		if (id == null) { return null; }
 		double current = playerbank.get(id);

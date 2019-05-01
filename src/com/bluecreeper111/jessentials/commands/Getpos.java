@@ -12,6 +12,7 @@ import com.bluecreeper111.jessentials.api.api;
 
 public class Getpos implements CommandExecutor {
 	
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (!(sender instanceof Player)) {
 			api.notPlayer();

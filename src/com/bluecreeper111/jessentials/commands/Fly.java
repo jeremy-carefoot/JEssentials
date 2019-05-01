@@ -10,6 +10,7 @@ import com.bluecreeper111.jessentials.api.api;
 
 public class Fly implements CommandExecutor {
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
 		if (args.length < 1) {

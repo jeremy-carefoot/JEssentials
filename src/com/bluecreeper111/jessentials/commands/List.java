@@ -29,7 +29,7 @@ public class List extends JCommand {
 			for (Player player : Vanish.vanishedPlayers) {
 				vanished = vanished + player.getDisplayName() + "§r, ";
 			}
-			p.sendMessage(api.getLangString("listHeader").replaceAll("%players%", Integer.toString(Bukkit.getOnlinePlayers().size() - vanishedPlayers) + "§r\n" + text));
+			p.sendMessage(api.getLangString("listHeader").replaceAll("%players%", Integer.toString(Bukkit.getOnlinePlayers().size() - vanishedPlayers)) + "§r\n" + text);
 			if (Vanish.vanishedPlayers.size() > 0) {
 				p.sendMessage(api.getLangString("listHidden").replaceAll("%hidden%", Integer.toString(vanishedPlayers)) + "§r\n" + vanished);
 			}
@@ -43,7 +43,7 @@ public class List extends JCommand {
 				if (Vanish.vanishedPlayers.contains(player)) { break; }
 				text = text + player.getDisplayName() + "§r, ";
 			}
-			p.sendMessage(api.getLangString("listHeader").replaceAll("%players%", Integer.toString(Bukkit.getOnlinePlayers().size() - vanishedPlayers) + "§r\n" + text));
+			p.sendMessage(api.getLangString("listHeader").replaceAll("%players%", Integer.toString(Bukkit.getOnlinePlayers().size() - vanishedPlayers)) + "§r\n" + text);
 			return;
 		}
 		

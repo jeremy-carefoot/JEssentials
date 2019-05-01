@@ -1,9 +1,11 @@
 main: com.bluecreeper111.jessentials.Main
 author: bluecreeper111
-version: 1.3.6
+version: 1.4.0
 description: Fully customizable essentials plugin.
 name: JEssentials
-api-version: 1.13
+api-version: 1.14
+softdepend: [PlaceholderAPI]
+depend: [Vault]
 commands:
   heal:
     description: Allows player to heal themself or others.

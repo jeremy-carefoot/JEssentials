@@ -30,6 +30,7 @@ public class Spawn implements CommandExecutor {
 				api.incorrectSyntaxConsole("/spawn <player>");
 				return true;
 			} else {
+				@SuppressWarnings("deprecation")
 				Player target = Bukkit.getPlayerExact(args[0]);
 				if (target == null) {
 					api.pNotFoundConsole(args[0]);
@@ -74,6 +75,7 @@ public class Spawn implements CommandExecutor {
 					api.tpDelayLoc(loc, p, plugin);
 					return true;
 				} else if (args.length == 1) {
+					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getPlayerExact(args[0]);
 					if (p.hasPermission(api.perp() + ".spawn.others")) {
 						if (target == null) {

@@ -25,6 +25,7 @@ public class Tpa implements CommandExecutor {
 	public static HashMap<Player, Player> tpa = new HashMap<Player, Player>();
 	public static HashMap<Player, Boolean> tpaHere = new HashMap<Player, Boolean>();
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		List<String> tpaMessage = plugin.getConfig().getStringList("tpaMessage");
