@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import com.bluecreeper111.jessentials.Main;
 import com.bluecreeper111.jessentials.api.api;
+import com.bluecreeper111.jessentials.event.playerDeath;
 
 public class Tp implements CommandExecutor {
 	
@@ -40,6 +41,7 @@ public class Tp implements CommandExecutor {
 					logger.info(api.getLangString("tpOff") + "(To bypass, use /tpo)");
 					return true;
 				}
+				playerDeath.deathInfo.put(target.getName(), target.getLocation());
 				target.teleport(to);
 				target.sendMessage(api.teleportMessage.replaceAll("%delay%", "0"));
 				logger.info(api.getLangString("playersTeleported"));
@@ -63,7 +65,9 @@ public class Tp implements CommandExecutor {
 							return true;
 						}
 						api.tpDelayEntity(target, p, plugin);
-						target.sendMessage(api.getLangString("teleportingReceive").replaceAll("%player%", target.getName()));
+						if (!Vanish.vanishedPlayers.contains(p)) {
+						target.sendMessage(api.getLangString("teleportingReceive").replaceAll("%player%", p.getName()));
+						}
 						return true;
 					}
 				} else if (args.length == 2) {
@@ -88,7 +92,7 @@ public class Tp implements CommandExecutor {
 						api.tpDelayEntity(to, target, plugin);
 						to.sendMessage(api.getLangString("teleportingReceive").replaceAll("%player%", target.getName()));
 						target.sendMessage(api.getLangString("teleportingSent").replaceAll("%player%", to.getName()));
-						p.sendMessage(api.getLangString("playersTeleporting"));
+						p.sendMessage(api.getLangString("playersTeleported"));
 						return true;
 						
 					}

@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 
 import com.bluecreeper111.jessentials.api.api;
+import com.bluecreeper111.jessentials.event.playerDeath;
 
 public class Tpo implements CommandExecutor {
 
@@ -31,7 +32,7 @@ public class Tpo implements CommandExecutor {
 					api.pNotFoundConsole(args[1]);
 					return true;
 				}
-
+				playerDeath.deathInfo.put(target.getName(), target.getLocation());
 				target.teleport(to);
 				target.sendMessage(api.teleportMessage.replaceAll("%delay%", "0"));
 				logger.info(api.getLangString("playersTeleported"));
@@ -50,9 +51,12 @@ public class Tpo implements CommandExecutor {
 						api.pNotFound(p, args[0]);
 						return true;
 					} else {
+						playerDeath.deathInfo.put(p.getName(), p.getLocation());
 						p.teleport(target);
 						p.sendMessage(api.teleportMessage.replaceAll("%delay%", "0"));
+						if (!Vanish.vanishedPlayers.contains(p)) {
 						target.sendMessage(api.getLangString("teleportingReceive").replaceAll("%player%", p.getName()));
+						}
 						return true;
 					}
 				} else if (args.length == 2) {
@@ -70,6 +74,7 @@ public class Tpo implements CommandExecutor {
 							api.pNotFound(p, args[1]);
 							return true;
 						}
+						playerDeath.deathInfo.put(target.getName(), target.getLocation());
 						target.teleport(to);
 						to.sendMessage(api.getLangString("teleportingReceive").replaceAll("%player%", target.getName()));
 						target.sendMessage(api.getLangString("teleportingSent").replaceAll("%player%", to.getName()));

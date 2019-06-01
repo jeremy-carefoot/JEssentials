@@ -4,7 +4,7 @@
 #                                         #
 #-----------------------------------------#
 #                                         #
-#              Version 1.4.0              #
+#              Version 1.5                #
 #                                         #
 #-----------------------------------------#
  
@@ -61,10 +61,13 @@ leaveMessage: '&e%player% has left the game.'
 
 firstJoinMessage: '&dWelcome %player% to the server for the first time!'
 
+# Choose a nickname prefix which will be displayed in front of nicknames
+# NOTE: Should only be a single character.
+nick-prefix: '~'
 
 # Define MOTD (message sent to player when they join.)
 # PlaceholderAPI is supported in the following message, along with the %player% variable.
-motd: '&6Welcome to our server %player%!'
+motd: "&6Welcome to our server %player%!\n&7Run /help!"
 
 
 # Change the server chat format here
@@ -88,6 +91,7 @@ chat-format: '%group% &f<%playerDisplay%> %message%'
 
 # Choose whether or not you want the startup message to be displayed in game-chat.
 # (Personally, I'd recommend disabling this. I only have it to remind you to report all bugs to the github!)
+# NOTE: It is only displayed to OPS.
 
 enable-startupMessage: true
 
@@ -97,9 +101,18 @@ enable-economy: true
 # Enable/disable MOTD.
 enable-motd: true
 
-# Define how many homes players are allowed to set if they have the permission jessentials.sethome.multiple
-# NOTE: Do not use decimal numbers. This will return an error to console.
-homeNumber: 3
+# Choose whether or not to enable having a nick prefix
+enable-nick-prefix: true
+
+# Define how many homes seperate groups are allowed to have.
+# The player must also have the permission jessentials.sethome.multiple
+# If the player has the permission, but does not belong to a specified group, they will default to one home
+# NOTE: This requires the plugin Vault AND a permissions plugin
+homes:
+# FORMAT: "group name: number"
+  vip: 5
+  moderator: 10
+  admin: 40
 
 # Choose whether to enable broadcasting when a player is banned.
 
@@ -183,3 +196,5 @@ disposalSign: '&8[Disposal]'
 freeSign: '&1[Free]'
 warpSign: '&1[Warp]'
 kitSign: '&1[Kit]'
+buySign: '&1[Buy]'
+sellSign: '&1[Sell]'

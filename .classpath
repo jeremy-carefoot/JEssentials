@@ -11,6 +11,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Jeremy.Carefoot/Desktop/Programming/Minecraft/Jars/craftbukkit-1.14-R0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jeremy.Carefoot/Desktop/Programming/Minecraft/Jars/craftbukkit 1.14.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

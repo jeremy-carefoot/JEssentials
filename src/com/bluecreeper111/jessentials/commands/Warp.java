@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import com.bluecreeper111.jessentials.Main;
 import com.bluecreeper111.jessentials.api.api;
+import com.bluecreeper111.jessentials.event.playerDeath;
 
 import org.bukkit.ChatColor;
 
@@ -75,6 +76,7 @@ public class Warp implements CommandExecutor {
 						Location loc = new Location(Bukkit.getWorld(world), x, y, z);
 						loc.setPitch((float)pitch);
 						loc.setYaw((float)yaw);
+						playerDeath.deathInfo.put(target.getName(), target.getLocation());
 						target.teleport(loc);
 						target.sendMessage(api.teleportMessage);
 						logger.info(api.getLangString("playersTeleported"));

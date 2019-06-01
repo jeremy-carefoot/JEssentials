@@ -3,6 +3,7 @@ package com.bluecreeper111.jessentials.commands;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,12 +23,9 @@ public class Motd implements CommandExecutor {
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		String motd = api.translateColor((plugin.getConfig().getString("motd")));
 		if (args.length == 0) {
 			if (!(sender instanceof Player)) {
-				Logger logger = Bukkit.getLogger();
-				motd = motd.replaceAll("%player%", "console");
-				logger.info(motd);
+				this.sendMotd(sender);
 				return true;
 			} else {
 				Player p = (Player) sender;
@@ -35,11 +33,7 @@ public class Motd implements CommandExecutor {
 					api.noPermission(p);
 					return true;
 				} else {
-					motd = motd.replaceAll("%player%", p.getName().toString());
-					if (Main.pApi) {
-						motd = PlaceholderAPI.setPlaceholders(p, motd);
-					}
-					p.sendMessage(motd);
+					this.sendMotd(sender);
 					return true;
 				}
 			}
@@ -126,5 +120,14 @@ public class Motd implements CommandExecutor {
 		}
 		return true;
 	}
+	public void sendMotd(CommandSender sender) {
+		String message = plugin.getConfig().getString("motd");
+			if (Main.pApi && sender instanceof Player) {
+				message = PlaceholderAPI.setPlaceholders((Player)sender, message);
+			}
+			message = ChatColor.translateAlternateColorCodes('&', message);
+			sender.sendMessage(message.replaceAll("%player%", sender.getName()));
+		}
+	}
 
-}
+

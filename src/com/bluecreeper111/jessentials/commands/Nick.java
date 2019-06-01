@@ -16,11 +16,19 @@ import com.bluecreeper111.jessentials.api.api;
 
 public class Nick implements CommandExecutor {
 	
+	private Main plugin;
+	
+	public Nick(Main pl) {
+		plugin = pl;
+	}
+	
 	public static HashMap<String, Player> realname = new HashMap<String, Player>();
 
 	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		String nickMessage = api.getLangString("nickMessage");
+		String nickChar = plugin.getConfig().getString("nick-prefix");
+		boolean enableNickChar = plugin.getConfig().getBoolean("enable-nick-prefix");
 		if (!(sender instanceof Player)) {
 			Logger logger = Bukkit.getLogger();
 			if (args.length == 0) {
@@ -33,13 +41,18 @@ public class Nick implements CommandExecutor {
 					return true;
 				} else {
 					String nick = args[1];
-					nick = "§r" + nick + "§r~";
+					nick = "§r" + nick;
+					if (enableNickChar) {
+						nick = nick + "§r" + nickChar;
+					}
 					nick = api.translateColor(nick);
 					target.setDisplayName(nick);
 					target.setCustomName(nick);
 					target.setPlayerListName(nick);
 					String nick1 = ChatColor.stripColor(nick);
-					nick1 = nick1.replace("~", "");
+					if (enableNickChar) {
+						nick1 = nick1.substring(0, nick1.length() - 2);
+					}
 					Main.playerData.set(target.getName() + ".nick", nick);
 					Main.playerData.set(target.getName() + ".realnameKey", nick1);
 					try {
@@ -79,7 +92,10 @@ public class Nick implements CommandExecutor {
 					return true;
 				} else if (args.length == 1) {
 					String nick = args[0];
-					nick = "§r" + nick + "§r~";
+					nick = "§r" + nick;
+					if (enableNickChar) {
+						nick = nick + "§r" + nickChar;
+					}
 					if (p.hasPermission(api.perp() + ".nick.color")) {
 						nick = api.translateColor(nick);
 					}
@@ -87,7 +103,9 @@ public class Nick implements CommandExecutor {
 					p.setCustomName(nick);
 					p.setPlayerListName(nick);
 					String nick1 = ChatColor.stripColor(nick);
-					nick1 = nick1.replace("~", "");
+					if (enableNickChar) {
+						nick1 = nick1.substring(0, nick1.length() - 2);
+					}
 					Main.playerData.set(p.getName() + ".nick", nick);
 					Main.playerData.set(p.getName() + ".realnameKey", nick1);
 					try {
@@ -109,7 +127,10 @@ public class Nick implements CommandExecutor {
 						return true;
 					} else {
 						String nick = args[1];
-						nick = "§r" + nick + "§r~";
+						nick = "§r" + nick;
+						if (enableNickChar) {
+							nick = nick + "§r" + nickChar;
+						}
 						if (p.hasPermission(api.perp() + ".nick.color")) {
 							nick = api.translateColor(nick);
 						}
@@ -117,7 +138,9 @@ public class Nick implements CommandExecutor {
 							target.setCustomName(nick);
 							target.setPlayerListName(nick);
 							String nick1 = ChatColor.stripColor(nick);
-							nick1 = nick1.replace("~", "");
+							if (enableNickChar) {
+								nick1 = nick1.substring(0, nick1.length() - 2);
+							}
 							Main.playerData.set(target.getName() + ".nick", nick);
 							Main.playerData.set(target.getName() + ".realnameKey", nick1);
 							try {

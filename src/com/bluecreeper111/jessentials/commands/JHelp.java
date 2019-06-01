@@ -38,7 +38,7 @@ public class JHelp implements CommandExecutor {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
 	        sender.sendMessage("§e/delhome §7- Deletes a home.");
 	        sender.sendMessage("§e/home §7- Teleport to a home.");
-	        sender.sendMessage("§e/back §7- Teleports to death location.");
+	        sender.sendMessage("§e/back §7- Teleports to death/previous teleport location.");
 	        sender.sendMessage("§e/invsee §7- Allow modification/viewing of a players inventory.");
 	        sender.sendMessage("§e/item §7- Gives an item based on Bukkit item id's.");
 	        sender.sendMessage("§8------------------§6Page 4/14§8------------------");
@@ -72,7 +72,7 @@ public class JHelp implements CommandExecutor {
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("8")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
-	        sender.sendMessage("§e/skull §7- Gets a players head.");
+	        sender.sendMessage("§e/jhelp - Opens help menu.");
 	        sender.sendMessage("§e/setworldspawn §7- Sets the world spawnpoint.");
 	        sender.sendMessage("§e/tpa §7- Request to teleport to a player.");
 	        sender.sendMessage("§e/tpahere §7- Request a player to teleport to you.");
@@ -130,7 +130,7 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/mail §7- Send, read, or clear mail.");
 	        sender.sendMessage("§e/socialspy §7- View other players private messages.");
 	        sender.sendMessage("§e/speed §7- Change your speed.");
-	        sender.sendMessage(" ");
+	        sender.sendMessage("§e/seen §7- View when a player was last online.");
 	        sender.sendMessage("§8------------------§6Page 14/14§8------------------");
 	        return true;
 		} else {

@@ -29,9 +29,9 @@ public class playerJoinLeave implements Listener {
 	@EventHandler
 	public void playerJoin(PlayerJoinEvent e) {
 		String joinMessage = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("joinMessage"));
-		String motd = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("motd"));
 		String nick = Main.playerData.getString(e.getPlayer().getName() + ".nick");
 		String realnameKey = Main.playerData.getString(e.getPlayer().getName() + ".realnameKey");
+		String motd = plugin.getConfig().getString("motd");
 		if (plugin.getConfig().getBoolean("enable-startupMessage") && e.getPlayer().isOp()) {
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 				public void run() {
@@ -71,9 +71,8 @@ public class playerJoinLeave implements Listener {
 			if (Main.pApi) {
 			motd = PlaceholderAPI.setPlaceholders(e.getPlayer(), motd);
 			}
-			e.getPlayer().sendMessage(motd);
 		}
-		if (e.getPlayer().hasPermission(api.perp() + ".*")) {
+		if (e.getPlayer().hasPermission(api.perp() + ".*") && Main.getPermissions() != null) {
 			for (Permission permission : Bukkit.getPluginManager().getPermissions()) {
 				Main.getPermissions().playerAdd(e.getPlayer(), permission.getName());
 			}

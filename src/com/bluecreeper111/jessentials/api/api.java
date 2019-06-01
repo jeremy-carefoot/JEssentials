@@ -11,8 +11,10 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import com.bluecreeper111.jessentials.Main;
+import com.bluecreeper111.jessentials.event.playerDeath;
 
 public class api extends Main {
 
@@ -48,6 +50,7 @@ public class api extends Main {
 	public static void tpDelayLoc(Location loc, Player p, Main plugin) {
 		if (tpDelayEnable == true) {
 			if (p.hasPermission(api.perp() + ".tpdelay.bypass")) {
+				playerDeath.deathInfo.put(p.getName(), p.getLocation());
 				p.teleport(loc);
 				tpSafetyLoc(p, plugin);
 				p.sendMessage(api.getLangString("teleportMessage"));
@@ -60,6 +63,7 @@ public class api extends Main {
 				public void run() {
 					teleportDelay.tpDelayPlayers.remove(p.getName());
 					if (tpDelayCancelled.get(p.getName()) == false) {
+						playerDeath.deathInfo.put(p.getName(), p.getLocation());
 						p.teleport(loc);
 						tpSafetyLoc(p, plugin);
 						p.sendMessage(api.getLangString("teleportMessage"));
@@ -72,6 +76,7 @@ public class api extends Main {
 			}, tpDelay);
 
 		} else {
+			playerDeath.deathInfo.put(p.getName(), p.getLocation());
 			p.teleport(loc);
 			tpSafetyLoc(p, plugin);
 			p.sendMessage(api.getLangString("teleportMessage"));
@@ -94,6 +99,7 @@ public class api extends Main {
 	public static void tpDelayEntity(Player to, Player p, Main plugin) {
 		if (tpDelayEnable == true) {
 			if (p.hasPermission(api.perp() + "tpdelay.bypass")) {
+				playerDeath.deathInfo.put(p.getName(), p.getLocation());
 				p.teleport(to);
 				tpSafetyLoc(p, plugin);
 				p.sendMessage(api.getLangString("teleportMessage"));
@@ -106,6 +112,7 @@ public class api extends Main {
 				public void run() {
 					teleportDelay.tpDelayPlayers.remove(p.getName());
 					if (tpDelayCancelled.get(p.getName()) == false) {
+						playerDeath.deathInfo.put(p.getName(), p.getLocation());
 						p.teleport(to);
 						tpSafetyLoc(p, plugin);
 						p.sendMessage(api.getLangString("teleportMessage"));
@@ -118,6 +125,7 @@ public class api extends Main {
 			}, tpDelay);
 
 		} else {
+			playerDeath.deathInfo.put(p.getName(), p.getLocation());
 			p.teleport(to);
 			tpSafetyLoc(p, plugin);
 			p.sendMessage(api.getLangString("teleportMessage"));
@@ -179,7 +187,7 @@ public class api extends Main {
 	}
 	public static String getLangString(String path) {
 		if (Main.language.getString("l." + path) == null) {
-			Bukkit.getLogger().severe("No lang file found! Please install one from our github.");
+			Bukkit.getLogger().severe("Error occured: Couldn't find message " + path);
 		}
 		return api.translateColor(Main.language.getString("l." + path));
 	}
@@ -193,6 +201,13 @@ public class api extends Main {
 			return false;
 		}
 		return true;
+	}
+	public static void addItem(Player p, ItemStack item) {
+		if (p.getInventory().firstEmpty() == -1) {
+			p.getWorld().dropItem(p.getLocation(), item);
+		} else {
+			p.getInventory().addItem(item);
+		}
 	}
 
 }

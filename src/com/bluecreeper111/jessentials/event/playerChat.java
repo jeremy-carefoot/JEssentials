@@ -35,14 +35,20 @@ public class playerChat implements Listener {
 			event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
 		}
 		if (event.getMessage().contains("\\")) {
-			event.setMessage(event.getMessage().replaceAll("\\", "\\\\"));
+			event.setMessage(event.getMessage().replaceAll("\\", ""));
 		}
 		String messageFormat = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("chat-format"));
-		String group = "null";
-		String pDisplayName = "null";
-		group = Main.getChat().getPrimaryGroup(p);
-		pDisplayName = Main.getChat().getPlayerPrefix(p).replaceAll("&", "§") + p.getDisplayName() + Main.getChat().getPlayerSuffix(p).replaceAll("&", "§");
-		String prefix = Main.getChat().getGroupPrefix(p.getWorld().getName(), group);
+		String group = "";
+		String pDisplayName = "";
+		String prefix = "";
+		if (Main.getChat() != null) {
+			group = Main.getChat().getPrimaryGroup(p);
+			pDisplayName = Main.getChat().getPlayerPrefix(p).replaceAll("&", "§") + p.getDisplayName() + Main.getChat().getPlayerSuffix(p).replaceAll("&", "§");
+			prefix = Main.getChat().getGroupPrefix(p.getWorld().getName(), group);
+		} else {
+			pDisplayName = p.getDisplayName();
+			prefix = "";
+		}
 		messageFormat = messageFormat.replaceAll("%player%", p.getName().toString());
 		messageFormat = messageFormat.replaceAll("%playerDisplay%", pDisplayName != null ? pDisplayName : p.getDisplayName());
 		messageFormat = messageFormat.replaceAll("%message%", event.getMessage());

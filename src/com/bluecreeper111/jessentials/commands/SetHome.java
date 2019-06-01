@@ -3,6 +3,7 @@ package com.bluecreeper111.jessentials.commands;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,11 +14,10 @@ import org.bukkit.entity.Player;
 import com.bluecreeper111.jessentials.Main;
 import com.bluecreeper111.jessentials.api.api;
 
-
-
 public class SetHome implements CommandExecutor {
+	
 	private Main plugin;
-
+	
 	public SetHome(Main pl) {
 		plugin = pl;
 	}
@@ -26,23 +26,36 @@ public class SetHome implements CommandExecutor {
 
 	public static File homesFile = new File("plugins//JEssentials//homes.yml");
 	public static YamlConfiguration homes = YamlConfiguration.loadConfiguration(homesFile);
+	
+	public Integer howManyHomes(Player p) {
+		if (Main.getPermissions() != null) {
+			String group = Main.getPermissions().getPrimaryGroup(p) != null ? Main.getPermissions().getPrimaryGroup(p) : "default";
+			for (String match : plugin.getConfig().getConfigurationSection("homes").getKeys(false)) {
+				if (group.equalsIgnoreCase(match)) {
+					return plugin.getConfig().getInt("homes." + match);
+				}
+			}
+			return 1;
+		} else {
+			Bukkit.getConsoleSender().sendMessage("§cError: No permissions plugin installed.");
+			return 1;
+		}
+	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		int maxHomes = plugin.getConfig().getInt("homeNumber");
 		String setHomeMessage = api.getLangString("setHomeMessage");
 		if (!(sender instanceof Player)) {
 			api.notPlayer();
 			return true;
 		}
 		Player p = (Player) sender;
-		int houseNumber = homes.getInt(p.getName() + ".homeNumber");
-		int houseNumber1 = houseNumber + 1;
+		int houseNumber = homes.contains(p.getName()) ? homes.getConfigurationSection(p.getName()).getKeys(false).size() : 0;
 		if (!p.hasPermission(api.perp() + ".sethome")) {
 			api.noPermission(p);
 			return true;
 		} else {
 			if (p.hasPermission(api.perp() + ".sethome.multiple")) {
-				
+				int maxHomes = this.howManyHomes(p);
 				if (args.length == 0) {
 					api.incorrectSyntax(p, "/sethome <name>");
 					return true;
@@ -51,11 +64,6 @@ public class SetHome implements CommandExecutor {
 					p.sendMessage(api.getLangString("maxHomes"));
 					return true;
 				}
-				if (args[0].equals("homeNumber")) {
-					p.sendMessage(api.getLangString("invalidHomeName"));
-					return true;
-				}
-				
 					Location loc = p.getLocation();
 					double x = loc.getX();
 					double y = loc.getY();
@@ -63,7 +71,6 @@ public class SetHome implements CommandExecutor {
 					double yaw = loc.getYaw();
 					double pitch = loc.getPitch();
 					String world = p.getWorld().getName();
-					homes.set(p.getName() + ".homeNumber", Integer.valueOf(houseNumber1));
 					homes.set(p.getName() + "." + args[0] + ".world", world);
 					homes.set(p.getName() + "." + args[0] + ".x", Double.valueOf(x));
 					homes.set(p.getName() + "." + args[0] + ".y", Double.valueOf(y));
@@ -91,7 +98,6 @@ public class SetHome implements CommandExecutor {
 				double yaw = loc.getYaw();
 				double pitch = loc.getPitch();
 				String world = p.getWorld().getName();
-				homes.set(p.getName() + ".homeNumber", Integer.valueOf(houseNumber1));
 				homes.set(p.getName() + "." + "home." + "world", world);
 				homes.set(p.getName() + "." + "home." + "x", Double.valueOf(x));
 				homes.set(p.getName() + "." + "home." + "y", Double.valueOf(y));

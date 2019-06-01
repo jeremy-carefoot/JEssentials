@@ -68,7 +68,6 @@ import com.bluecreeper111.jessentials.commands.SetHome;
 import com.bluecreeper111.jessentials.commands.SetSpawn;
 import com.bluecreeper111.jessentials.commands.SetWarp;
 import com.bluecreeper111.jessentials.commands.SetWorldSpawn;
-import com.bluecreeper111.jessentials.commands.Skull;
 import com.bluecreeper111.jessentials.commands.Spawn;
 import com.bluecreeper111.jessentials.commands.TempBan;
 import com.bluecreeper111.jessentials.commands.Time;
@@ -88,10 +87,12 @@ import com.bluecreeper111.jessentials.event.playerDeath;
 import com.bluecreeper111.jessentials.event.playerGamemode;
 import com.bluecreeper111.jessentials.event.playerGive;
 import com.bluecreeper111.jessentials.event.playerJoinLeave;
+import com.bluecreeper111.jessentials.signs.buySign;
 import com.bluecreeper111.jessentials.signs.disposalSign;
 import com.bluecreeper111.jessentials.signs.freeSign;
 import com.bluecreeper111.jessentials.signs.healSign;
 import com.bluecreeper111.jessentials.signs.kitSign;
+import com.bluecreeper111.jessentials.signs.sellSign;
 import com.bluecreeper111.jessentials.signs.warpSign;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
@@ -132,10 +133,14 @@ public class Main extends JavaPlugin {
 		logger.info("[JEssentials] -VERSION- Running version V." + pdfFile.getVersion());
 		logger.info("[JEssentials] -INFO- Please submit all bugs to the github! Project is in early stages!");
 		registerCommands();
-		economyImplementer = new JEconomy();
-		vaulthook = new VaultHook(this);
-		if (getConfig().getBoolean("enable-economy")) {
-			vaulthook.hook();
+		if (Bukkit.getPluginManager().getPlugin("Vault") != null) {
+			economyImplementer = new JEconomy();
+			vaulthook = new VaultHook(this);
+			if (getConfig().getBoolean("enable-economy")) {
+				vaulthook.hook();
+			}
+		} else {
+			Bukkit.getConsoleSender().sendMessage("§c§l[JEssentials] -ERROR- Vault not found! Plugin may return errors if not installed.");
 		}
 		if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
 			getLogger().info("-INFO- PlaceholderAPI has been sucessfully hooked.");
@@ -144,22 +149,19 @@ public class Main extends JavaPlugin {
 			getLogger().warning("-WARNING- PlaceholderAPI was not found. Features involving PlaceholderAPI will not correctly function.");
 			pApi = false;
 		}
-		setupChat();
-		setupPermissions();
-		setupEconomy();
 		if (setupChat() && setupPermissions() && setupEconomy()) {
 			logger.info("[JEssentials] Vault API loaded successfully!");
 		} else {
-			logger.severe("[JEssentials] Vault API could not be loaded. Dependency not found!");
+			Bukkit.getConsoleSender().sendMessage("§c[JEssentials] -ERROR- Vault API failed to load.");
 		}
 		currentVersion = Double.valueOf(pdfFile.getVersion().replaceFirst("1.", "")).doubleValue();
 		if (getConfig().getBoolean("checkForUpdates")) {
 			logger.info("[JEssentials] Checking for new plugin updates...");
 			returnedVersion = this.updateCheck(currentVersion);
 			if (returnedVersion > currentVersion) {
-				logger.warning("[JEssentials] -WARNING- There is a new version of the plugin available!");
-				logger.warning("[JEssentials] -WARNING- New version can be found here:");
-				logger.warning("[JEssentials] -WARNING- https://dev.bukkit.org/projects/just-essentials");
+				Bukkit.getConsoleSender().sendMessage("§e[JEssentials] -WARNING- There is a new version of the plugin available!");
+				Bukkit.getConsoleSender().sendMessage("§e[JEssentials] -WARNING- New version can be found here:");
+				Bukkit.getConsoleSender().sendMessage("§e[JEssentials] -WARNING- https://dev.bukkit.org/projects/just-essentials");
 				update = true;
 			} else if (returnedVersion == 0.0) {
 				update = false;
@@ -177,7 +179,9 @@ public class Main extends JavaPlugin {
 
 	public void onDisable() {
 		Logger logger = Bukkit.getLogger();
-		vaulthook.unhook();
+		if (economyEnabled) {
+			vaulthook.unhook();
+		}
 		logger.info("[JEssentials] -INFO- has been disabled with no errors.");
 
 	}
@@ -212,7 +216,7 @@ public class Main extends JavaPlugin {
 		getCommand("msg").setExecutor(new Msg(this));
 		getCommand("reply").setExecutor(new Reply(this));
 		getCommand("mute").setExecutor(new Mute(this));
-		getCommand("nick").setExecutor(new Nick());
+		getCommand("nick").setExecutor(new Nick(this));
 		getCommand("realname").setExecutor(new Realname());
 		getCommand("getpos").setExecutor(new Getpos());
 		getCommand("repair").setExecutor(new Repair());
@@ -222,7 +226,6 @@ public class Main extends JavaPlugin {
 		getCommand("delwarp").setExecutor(new DelWarp());
 		getCommand("warp").setExecutor(new Warp(this));
 		getCommand("setworldspawn").setExecutor(new SetWorldSpawn());
-		getCommand("skull").setExecutor(new Skull());
 		getCommand("tpa").setExecutor(new Tpa(this));
 		getCommand("tptoggle").setExecutor(new Tptoggle());
 		getCommand("tp").setExecutor(new Tp(this));
@@ -259,6 +262,8 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new freeSign(this), this);
 		pm.registerEvents(new warpSign(this), this);
 		pm.registerEvents(new kitSign(this), this);
+		pm.registerEvents(new buySign(this), this);
+		pm.registerEvents(new sellSign(this), this);
 		pm.registerEvents(new Mail(), this);
 		pm.registerEvents(new commandCooldown(this), this);
 
@@ -374,7 +379,6 @@ public class Main extends JavaPlugin {
 		pm.addPermission(new Permission(prefix + ".warp.*"));
 		pm.addPermission(new Permission(prefix + ".warp.list"));
 		pm.addPermission(new Permission(prefix + ".setworldspawn"));
-		pm.addPermission(new Permission(prefix + ".skull"));
 		pm.addPermission(new Permission(prefix + ".tpa"));
 		pm.addPermission(new Permission(prefix + ".tpaccept"));
 		pm.addPermission(new Permission(prefix + ".tpdeny"));
@@ -412,6 +416,7 @@ public class Main extends JavaPlugin {
 		pm.addPermission(new Permission(prefix + ".sign.free"));
 		pm.addPermission(new Permission(prefix + ".sign.warp"));
 		pm.addPermission(new Permission(prefix + ".sign.kit"));
+		pm.addPermission(new Permission(prefix + ".sign.buy"));
 		pm.addPermission(new Permission(prefix + ".balance"));
 		pm.addPermission(new Permission(prefix + ".balance.others"));
 		pm.addPermission(new Permission(prefix + ".pay"));
@@ -432,7 +437,7 @@ public class Main extends JavaPlugin {
 		pm.addPermission(new Permission(prefix + ".cooldown.bypass.*"));
 		pm.addPermission(new Permission(prefix + ".kit.setdelay"));
 		pm.addPermission(new Permission(prefix + ".kit.delay.bypass.*"));
-
+		pm.addPermission(new Permission(prefix + ".seen"));
 	}
 
 	public void saveDefaultConfig() {
@@ -458,6 +463,7 @@ public class Main extends JavaPlugin {
 				e.printStackTrace();
 			}
 		}
+		if (economyEnabled == false) return;
 		if (!JEconomy.econ.exists()) {
 			try {
 				JEconomy.econ.createNewFile();
@@ -493,12 +499,11 @@ public class Main extends JavaPlugin {
 			try {
 				chat = rsp.getProvider();
 			} catch (Exception e) {
-				getLogger().warning("-WARNING- Permissions plugin not found. Some features may not work.");
+				Bukkit.getConsoleSender().sendMessage("§6[JEssentials] -WARNING- Permissions plugin not found. Some features may not work.");
 				return true;
 			}
 			return true;
 		} catch (NoClassDefFoundError e) {
-			e.printStackTrace();
 			return false;
 		}
 	}
@@ -510,7 +515,6 @@ public class Main extends JavaPlugin {
 			permission = rsp.getProvider();
 			return true;
 		} catch (NoClassDefFoundError e) {
-			e.printStackTrace();
 			return false;
 		}
 	}
@@ -543,7 +547,6 @@ public class Main extends JavaPlugin {
 
 		} catch (Exception e) {
 			Bukkit.getLogger().severe("[JEssentials] Failed to check for a new update.");
-			e.printStackTrace();
 			return 0.0;
 		}
 
@@ -553,7 +556,7 @@ public class Main extends JavaPlugin {
 		try {
 			RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
 			if (rsp == null) {
-				this.getLogger().warning("-WARNING- No economy plugin found. Some features will not work!");
+				Bukkit.getConsoleSender().sendMessage("§6[JEssentials] -WARNING- No economy plugin found. Some features will not work!");
 				economyEnabled = false;
 				return true;
 			}
@@ -561,7 +564,6 @@ public class Main extends JavaPlugin {
 			economyEnabled = true;
 			return true;
 		} catch (NoClassDefFoundError e) {
-			e.printStackTrace();
 			economyEnabled = false;
 			return false;
 		}

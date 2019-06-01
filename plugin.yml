@@ -1,11 +1,9 @@
 main: com.bluecreeper111.jessentials.Main
 author: bluecreeper111
-version: 1.4.0
+version: 1.5
 description: Fully customizable essentials plugin.
 name: JEssentials
-api-version: 1.14
 softdepend: [PlaceholderAPI]
-depend: [Vault]
 commands:
   heal:
     description: Allows player to heal themself or others.
@@ -141,9 +139,6 @@ commands:
     description: Allows the player to set the spawn of the world.
     usage: /<command>
     aliases: [worldspawnset, sws]
-  skull:
-    description: Allows the player to obtain the skull of another player.
-    usage: /<command>
   tpa:
     description: Allows requesting to teleport to other players.
     usage: /<command>
@@ -237,6 +232,9 @@ commands:
     usage: /<command>
   speed:
     description: Change your flying or walking speed.
+    usage: /<command>
+  seen:
+    description: Check when a player last played.
     usage: /<command>
 
 

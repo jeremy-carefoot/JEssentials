@@ -14,16 +14,15 @@ import com.bluecreeper111.jessentials.api.api;
 public class Enchant implements CommandExecutor {
 	
 	private Enchantment getEnchantment(String enchString) {
-       for (Enchantment value : Enchantment.values()) {
-    	   if (value.getKey().getKey().equalsIgnoreCase(enchString)) {
-    		   return value;
-    	   }
-       }
-       return null;
-    }
+	       for (Enchantment value : Enchantment.values()) {
+	    	   if (value.getKey().getKey().equalsIgnoreCase(enchString)) {
+	    		   return value;
+	    	   }
+	       }
+	       return null;
+	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
 		if (!(sender instanceof Player)) {
 			api.notPlayer();
 			return true;

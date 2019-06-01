@@ -32,16 +32,11 @@ public class Home implements CommandExecutor {
 			return true;
 		} else {
 			Player p = (Player) sender;
-			int homeNumber = SetHome.homes.getInt(p.getName() + ".homeNumber");
+			int homeNumber = SetHome.homes.contains(p.getName()) ? SetHome.homes.getConfigurationSection(p.getName()).getKeys(false).size() : 0;
 			if (!p.hasPermission(api.perp() + ".home")) {
 				api.noPermission(p);
 				return true;
 			}
-			if (!SetHome.homes.isSet(p.getName() + ".homeNumber")) {
-				p.sendMessage(api.getLangString("noHome"));
-				return true;
-			}
-			
 			if (args.length == 0) {
 				if (homeNumber == 1) {
 					if (SetHome.homes.isSet(p.getName() + ".home.world")) {

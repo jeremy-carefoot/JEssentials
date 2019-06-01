@@ -21,8 +21,8 @@ public class Language {
 		Main.language.addDefault("l.afkBroadcast", "&5 * Player %player% &5is now afk!");
 		Main.language.addDefault("l.notAfkBroadcast", "&5 * Player %player% &5is no longer afk!");
 		Main.language.addDefault("l.backSender", "&6Player %player% sent to their death location.");
-		Main.language.addDefault("l.backNotDiedSender", "&cThat player hasn't died recently!");
-		Main.language.addDefault("l.backNotDied", "&cYou have not died recently!");
+		Main.language.addDefault("l.backNotDiedSender", "&cThat player hasn't died/teleported recently!");
+		Main.language.addDefault("l.backNotDied", "&cYou have not died/teleported recently!");
 		Main.language.addDefault("l.noEconomy", "&6&l[JEssentials] &r&cEconomy not enabled!");
 		Main.language.addDefault("l.balMessage", "&aBalance of player &2%player% &ais %amount%");
 		Main.language.addDefault("l.balTopHeader", "&aThe current baltop:");
@@ -141,7 +141,6 @@ public class Language {
 		Main.language.addDefault("l.invalidWarpName", "&cInvalid warp name!");
 		Main.language.addDefault("l.warpSet", "&cWarp already set!");
 		Main.language.addDefault("l.worldSpawnSet", "&6World spawnpoint set!");
-		Main.language.addDefault("l.skullMessage", "&6You have been given the skull of player &c%player%");
 		Main.language.addDefault("l.ssEnable", "&2SocialSpy enabled for: %player%");
 		Main.language.addDefault("l.ssDisable", "&2SocialSpy disabled for: %player%");
 		Main.language.addDefault("l.noSpawn", "&cNo spawn set!");
@@ -178,10 +177,15 @@ public class Language {
 		Main.language.addDefault("l.speedHigh", "&cThat speed is too high!");
 		Main.language.addDefault("l.kitDelaySet", "&6Delay for kit &c%kit% &6 set to &c%time% &6seconds.");
 		Main.language.addDefault("l.moneyLost", "&a%amount% has been taken from your balance.");
+		Main.language.addDefault("l.moneyGain", "&a%amount% has been added to your balance.");
 		Main.language.addDefault("l.spawnSet", "§6The spawnpoint has been set.");
 		Main.language.addDefault("l.pluginOutdated", "&6&l[JEssentials] &e&l-WARNING- &c&oYou are not running the latest version of the JEssentials plugin. Please check here for latest version;");
 		Main.language.addDefault("l.onCooldown", "&4Command &c%command% &4is on cooldown! &c%timeLeft% &4seconds before you can use it!");
 		Main.language.addDefault("l.kitCooldown", "&4Kit &c%kit% &4is currently in cooldown! &c%timeLeft% &4seconds before you can use it!");
+		Main.language.addDefault("l.invalidSignItem", "&4Error occured while using sign: Invalid Item!");
+		Main.language.addDefault("l.invalidSignPrice", "&4Error occured while using sign: Invalid Price! (Don't use a dollar sign!)");
+		Main.language.addDefault("l.invalidSignAmount", "&4Error occured while using sign: Invalid Amount!");
+		Main.language.addDefault("l.signSellInsufficient", "&cYou do not have enough of that item!");
 		
 		try {
 			Main.language.options().copyDefaults();

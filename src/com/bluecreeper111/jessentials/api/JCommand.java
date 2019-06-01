@@ -13,6 +13,7 @@ import com.bluecreeper111.jessentials.commands.List;
 import com.bluecreeper111.jessentials.commands.Mail;
 import com.bluecreeper111.jessentials.commands.Me;
 import com.bluecreeper111.jessentials.commands.Pay;
+import com.bluecreeper111.jessentials.commands.Seen;
 import com.bluecreeper111.jessentials.commands.Socialspy;
 import com.bluecreeper111.jessentials.commands.Speed;
 import com.bluecreeper111.jessentials.commands.Sudo;
@@ -42,6 +43,7 @@ public abstract class JCommand implements CommandExecutor {
 		new Mail();
 		new Socialspy();
 		new Speed();
+		new Seen();
 	}
 	
 	public abstract void execute(CommandSender sender, Command cmd, String label, String[] args);

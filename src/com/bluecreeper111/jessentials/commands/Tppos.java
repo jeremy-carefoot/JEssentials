@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.bluecreeper111.jessentials.api.api;
+import com.bluecreeper111.jessentials.event.playerDeath;
 
 public class Tppos implements CommandExecutor {
 	
@@ -42,6 +43,7 @@ public class Tppos implements CommandExecutor {
 					int y = Integer.parseInt(args[1]);
 					int z = Integer.parseInt(args[2]);
 					Location loc = new Location(p.getWorld(), x, y, z);
+					playerDeath.deathInfo.put(p.getName(), p.getLocation());
 					p.teleport(loc);
 					p.sendMessage(api.getLangString("teleportMessage"));
 					return true;

@@ -2,7 +2,7 @@ package com.bluecreeper111.jessentials.commands;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
@@ -59,12 +59,11 @@ public class Kit implements CommandExecutor, Listener {
 		kits.load(kitsFile);
 		if (kits.isSet("Kit." + kit.toLowerCase())) {
 			try {
-				ItemStack[] arrayOfItemStack;
-				@SuppressWarnings({ "unchecked", "rawtypes" })
-				int k = (arrayOfItemStack = (ItemStack[]) ((List) kits.get("Kit." + kit.toLowerCase() + ".items"))
-						.toArray(new ItemStack[0])).length;
-				for (int i = 0; i < k; i++) {
-					ItemStack a = arrayOfItemStack[i];
+				@SuppressWarnings("unchecked")
+				ArrayList<ItemStack> d = (ArrayList<ItemStack>) kits.get("Kit." + kit.toLowerCase() + ".items");
+				ItemStack[] items = d.toArray(new ItemStack[d.size()]);
+				for (int i = 0; i < items.length; i++) {
+					ItemStack a = items[i];
 					if (a != null) {
 						if (p.getInventory().firstEmpty() == -1) {
 							World w = p.getWorld();
