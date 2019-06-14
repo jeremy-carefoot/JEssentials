@@ -34,6 +34,7 @@ import com.bluecreeper111.jessentials.commands.BanIP;
 import com.bluecreeper111.jessentials.commands.Broadcast;
 import com.bluecreeper111.jessentials.commands.ChatClear;
 import com.bluecreeper111.jessentials.commands.Clear;
+import com.bluecreeper111.jessentials.commands.CreateCommand;
 import com.bluecreeper111.jessentials.commands.DelHome;
 import com.bluecreeper111.jessentials.commands.DelWarp;
 import com.bluecreeper111.jessentials.commands.Enchant;
@@ -94,6 +95,15 @@ import com.bluecreeper111.jessentials.signs.healSign;
 import com.bluecreeper111.jessentials.signs.kitSign;
 import com.bluecreeper111.jessentials.signs.sellSign;
 import com.bluecreeper111.jessentials.signs.warpSign;
+import com.bluecreeper111.jessentials.tab.EcoTab;
+import com.bluecreeper111.jessentials.tab.HomeTab;
+import com.bluecreeper111.jessentials.tab.JEssentialsTab;
+import com.bluecreeper111.jessentials.tab.KitTab;
+import com.bluecreeper111.jessentials.tab.MailTab;
+import com.bluecreeper111.jessentials.tab.TimeTab;
+import com.bluecreeper111.jessentials.tab.WarpTab;
+import com.bluecreeper111.jessentials.tab.WeatherTab;
+
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 
@@ -212,7 +222,6 @@ public class Main extends JavaPlugin {
 		getCommand("invsee").setExecutor(new Invsee());
 		getCommand("item").setExecutor(new Item());
 		getCommand("kick").setExecutor(new Kick());
-		getCommand("kit").setExecutor(new Kit(this));
 		getCommand("msg").setExecutor(new Msg(this));
 		getCommand("reply").setExecutor(new Reply(this));
 		getCommand("mute").setExecutor(new Mute(this));
@@ -243,6 +252,14 @@ public class Main extends JavaPlugin {
 		getCommand("banip").setExecutor(new BanIP(this));
 		getCommand("tempban").setExecutor(new TempBan(this));
 		getCommand("afk").setExecutor(new Afk(this));
+		getCommand("kit").setTabCompleter(new KitTab());
+		getCommand("economy").setTabCompleter(new EcoTab());
+		getCommand("jessentials").setTabCompleter(new JEssentialsTab());
+		getCommand("home").setTabCompleter(new HomeTab());
+		getCommand("mail").setTabCompleter(new MailTab());
+		getCommand("warp").setTabCompleter(new WarpTab());
+		getCommand("weather").setTabCompleter(new WeatherTab());
+		getCommand("time").setTabCompleter(new TimeTab());
 	}
 
 	public void registerEvents() {
@@ -255,7 +272,6 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new teleportDelay(), this);
 		pm.registerEvents(new playerDeath(), this);
 		pm.registerEvents(new playerChat(this), this);
-		pm.registerEvents(new Kit(this), this);
 		pm.registerEvents(new Afk(this), this);
 		pm.registerEvents(new healSign(this), this);
 		pm.registerEvents(new disposalSign(this), this);
@@ -266,6 +282,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new sellSign(this), this);
 		pm.registerEvents(new Mail(), this);
 		pm.registerEvents(new commandCooldown(this), this);
+		pm.registerEvents(new CreateCommand(), this);
 
 	}
 
@@ -438,8 +455,11 @@ public class Main extends JavaPlugin {
 		pm.addPermission(new Permission(prefix + ".kit.setdelay"));
 		pm.addPermission(new Permission(prefix + ".kit.delay.bypass.*"));
 		pm.addPermission(new Permission(prefix + ".seen"));
+		pm.addPermission(new Permission(prefix + ".more"));
+		pm.addPermission(new Permission(prefix + ".createcommand"));
+		pm.addPermission(new Permission(prefix + ".listcommands"));
+		pm.addPermission(new Permission(prefix + ".kit.give"));
 	}
-
 	public void saveDefaultConfig() {
 		if (!new File(getDataFolder(), "config.yml").exists()) {
 			saveResource("config.yml", false);
@@ -459,6 +479,24 @@ public class Main extends JavaPlugin {
 				Language.addStrings();
 				language.options().copyDefaults(true);
 				language.save(lang);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (!CreateCommand.commandsf.exists()) {
+			try {
+				CreateCommand.commandsf.createNewFile();
+				CreateCommand.commands.createSection("commands");
+				CreateCommand.commands.save(CreateCommand.commandsf);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (!Kit.kitsFile.exists()) {
+			try {
+				Kit.kitsFile.createNewFile();
+				Kit.kits.createSection("Kit");
+				Kit.kits.save(Kit.kitsFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

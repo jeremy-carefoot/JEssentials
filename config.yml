@@ -4,7 +4,7 @@
 #                                         #
 #-----------------------------------------#
 #                                         #
-#              Version 1.5                #
+#              Version 1.5.9              #
 #                                         #
 #-----------------------------------------#
  
@@ -79,8 +79,19 @@ motd: "&6Welcome to our server %player%!\n&7Run /help!"
 # %world% - The current player's world
 # %playerDisplay% - Uses the players nickname instead of their IGN name.
 
-chat-format: '%group% &f<%playerDisplay%> %message%'
+chat-format: '&f<%playerDisplay%> %message%'
 
+# Enable different chat formats for different groups.
+enable-per-group-formatting: false
+
+# If enable-per-group-formatting is enabled, different groups can have different chat formats.
+# Variables are exactly the same as normal chat-format ones
+# If a player does not belong to a group specified below, their format will default to the normal chat-format
+group-formats:
+  # Format: groupname: 'format'
+  # 2 Examples given below.
+  vip: '&c<%playerDisplay%> &8%message%'
+  admin: '&4<%playerDisplay%> &c%message%'
 
 
 #-----------------------------------------#
@@ -105,9 +116,11 @@ enable-motd: true
 enable-nick-prefix: true
 
 # Define how many homes seperate groups are allowed to have.
-# The player must also have the permission jessentials.sethome.multiple
-# If the player has the permission, but does not belong to a specified group, they will default to one home
-# NOTE: This requires the plugin Vault AND a permissions plugin
+# The player whom you are giving the homes must have the respective permission.
+# Example: For a player to have the group 'vip's home limit they must have the permission jessentials.sethome.multiple.vip
+# Permission format: jessentials.sethome.multiple.<group>
+# (NOTE: For permission, do not include '<' or '>'. Just to show that a custom group goes there and not 'group')
+# (NOTE: Player must also have permission 'jessentials.sethome.multiple')
 homes:
 # FORMAT: "group name: number"
   vip: 5

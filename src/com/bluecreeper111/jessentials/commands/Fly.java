@@ -44,12 +44,12 @@ public class Fly implements CommandExecutor {
 					if (target.getAllowFlight() == true) {
 						target.setAllowFlight(false);
 						target.sendMessage(api.getLangString("flyDisabled"));
-						sender.sendMessage(api.getLangString("flyMessageSender"));
+						sender.sendMessage(api.getLangString("flyMessageSender").replaceAll("%player%", target.getName()));
 						return true;
 					} else {
 						target.setAllowFlight(true);
 						target.sendMessage(api.getLangString("flyEnabled"));
-						sender.sendMessage(api.getLangString("flyMessageSender"));
+						sender.sendMessage(api.getLangString("flyMessageSender").replaceAll("%player%", target.getName()));
 						return true;
 					}
 				}
@@ -67,12 +67,12 @@ public class Fly implements CommandExecutor {
 						if (target.getAllowFlight() == false) {
 							target.setAllowFlight(true);
 							target.sendMessage(api.getLangString("flyEnabled"));
-							player.sendMessage(api.getLangString("flyMessageSender"));
+							player.sendMessage(api.getLangString("flyMessageSender").replaceAll("%player%", target.getName()));
 							return true;
 						} else {
 							target.setAllowFlight(false);
 							target.sendMessage(api.getLangString("flyDisabled"));
-							player.sendMessage(api.getLangString("flyMessageSender"));
+							player.sendMessage(api.getLangString("flyMessageSender").replaceAll("%player%", target.getName()));
 							return true;
 						}
 					}

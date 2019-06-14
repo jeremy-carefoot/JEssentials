@@ -1,6 +1,6 @@
 main: com.bluecreeper111.jessentials.Main
 author: bluecreeper111
-version: 1.5
+version: 1.5.9
 description: Fully customizable essentials plugin.
 name: JEssentials
 softdepend: [PlaceholderAPI]
@@ -93,6 +93,7 @@ commands:
   kit:
     description: Allows a player to get a predefined kit.
     usage: /<command>
+    aliases: [kits, kitadd, kitdelete, kitoptions, kitgive]
   msg:
     description: Allows a player to message another player.
     usage: /<command>
@@ -236,6 +237,22 @@ commands:
   seen:
     description: Check when a player last played.
     usage: /<command>
+  more:
+    description: Maxes stack size of the item you are holding.
+    usage: /<command>
+    aliases: topup
+  createcommand:
+    description: Used to create custom commands.
+    usage: /<command>
+    aliases: createcmd
+  listcommands:
+    description: List all custom commands.
+    usage: /<command>
+    aliases: listcmds
+  deletecommand:
+    description: Delete a custom command.
+    usage: /<command>
+    aliases: deletecmd
 
 
     

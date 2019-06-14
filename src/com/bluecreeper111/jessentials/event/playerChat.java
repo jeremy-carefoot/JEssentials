@@ -49,6 +49,22 @@ public class playerChat implements Listener {
 			pDisplayName = p.getDisplayName();
 			prefix = "";
 		}
+		if (plugin.getConfig().getBoolean("enable-per-group-formatting")) {
+			boolean belongtogroup = true;
+			try {
+				Main.getChat().getPrimaryGroup(p);
+			} catch (NullPointerException e) {
+				belongtogroup = false;
+			}
+			if (Main.getChat().getPrimaryGroup(p) == null) belongtogroup = false;
+			if (belongtogroup) {
+			for (String g : plugin.getConfig().getConfigurationSection("group-formats").getKeys(false)) {
+				if (g.equalsIgnoreCase(Main.getChat().getPrimaryGroup(p))) {
+					messageFormat = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("group-formats." + g));
+				}
+			}
+			}
+		}
 		messageFormat = messageFormat.replaceAll("%player%", p.getName().toString());
 		messageFormat = messageFormat.replaceAll("%playerDisplay%", pDisplayName != null ? pDisplayName : p.getDisplayName());
 		messageFormat = messageFormat.replaceAll("%message%", event.getMessage());
@@ -57,7 +73,11 @@ public class playerChat implements Listener {
 		if (Main.pApi) {
 		messageFormat = PlaceholderAPI.setPlaceholders(p, messageFormat);
 		}
+		try {
 		event.setFormat(messageFormat);
+		} catch (Exception e) {
+			plugin.getLogger().info("ERROR: Could not set message format:" + e.getCause());
+		}
 		if (Mute.muted.contains(p.getName())) {
 			p.sendMessage(api.getLangString("muted"));
 			event.setCancelled(true);

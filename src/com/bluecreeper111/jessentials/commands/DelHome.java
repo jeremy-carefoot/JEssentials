@@ -24,7 +24,7 @@ public class DelHome implements CommandExecutor {
 			return true;
 		} else {
 			Player p = (Player) sender;
-			int houseNumber = SetHome.homes.getInt(p.getName() + ".homeNumber");
+			int houseNumber = SetHome.homes.contains(p.getName()) ? SetHome.homes.getConfigurationSection(p.getName()).getKeys(false).size() : 0;
 			if (!p.hasPermission(api.perp() + ".delhome")) {
 				api.noPermission(p);
 				return true;
@@ -40,7 +40,6 @@ public class DelHome implements CommandExecutor {
 				if (houseNumber == 1) {
 					if (SetHome.homes.isSet(p.getName() + ".home.world")) {
 						SetHome.homes.set(p.getName() + ".home", null);
-						SetHome.homes.set(p.getName() + ".homeNumber", Integer.valueOf(houseNumber - 1));
 						try {
 							SetHome.homes.save(SetHome.homesFile);
 						} catch (IOException e) {
@@ -67,7 +66,6 @@ public class DelHome implements CommandExecutor {
 	            }
 				if (SetHome.homes.isSet(p.getName() + "." + args[0] + ".world")) {
 					SetHome.homes.set(p.getName() + "." + args[0], null);
-					SetHome.homes.set(p.getName() + ".homeNumber", Integer.valueOf(houseNumber - 1));
 					try {
 						SetHome.homes.save(SetHome.homesFile);
 					} catch (IOException e) {

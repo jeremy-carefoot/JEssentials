@@ -175,7 +175,7 @@ public class Language {
 		Main.language.addDefault("l.flySpeed", "&6Flying speed for &c%player% &r&6set to &c%speed%");
 		Main.language.addDefault("l.walkSpeed", "&6Walking speed for &c%player% &r&6set to &c%speed%");
 		Main.language.addDefault("l.speedHigh", "&cThat speed is too high!");
-		Main.language.addDefault("l.kitDelaySet", "&6Delay for kit &c%kit% &6 set to &c%time% &6seconds.");
+		Main.language.addDefault("l.kitDelaySet", "&6Delay for kit &c%kit% &6set to &c%time% &6seconds.");
 		Main.language.addDefault("l.moneyLost", "&a%amount% has been taken from your balance.");
 		Main.language.addDefault("l.moneyGain", "&a%amount% has been added to your balance.");
 		Main.language.addDefault("l.spawnSet", "§6The spawnpoint has been set.");
@@ -186,6 +186,11 @@ public class Language {
 		Main.language.addDefault("l.invalidSignPrice", "&4Error occured while using sign: Invalid Price! (Don't use a dollar sign!)");
 		Main.language.addDefault("l.invalidSignAmount", "&4Error occured while using sign: Invalid Amount!");
 		Main.language.addDefault("l.signSellInsufficient", "&cYou do not have enough of that item!");
+		Main.language.addDefault("l.toppedUp", "&aThe item you are holding has been topped up!");
+		Main.language.addDefault("l.commandDeleted", "&cCommand &4%command% &chas been deleted.");
+		Main.language.addDefault("l.commandNotFound", "&cCommand &4%command% &cwas not found. &r&f(Remember: Do not put the '/' in-front!)");
+		Main.language.addDefault("l.noCommands", "&cNo custom commands!");
+		Main.language.addDefault("l.kitGive", "&aKit &2%kit% &ahas been given to player &2%player%&a.");
 		
 		try {
 			Main.language.options().copyDefaults();

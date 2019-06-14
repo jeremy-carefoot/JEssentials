@@ -8,10 +8,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.bluecreeper111.jessentials.commands.Balance;
 import com.bluecreeper111.jessentials.commands.Baltop;
+import com.bluecreeper111.jessentials.commands.CreateCommand;
+import com.bluecreeper111.jessentials.commands.DeleteCommand;
 import com.bluecreeper111.jessentials.commands.Eco;
+import com.bluecreeper111.jessentials.commands.Kit;
 import com.bluecreeper111.jessentials.commands.List;
+import com.bluecreeper111.jessentials.commands.ListCommand;
 import com.bluecreeper111.jessentials.commands.Mail;
 import com.bluecreeper111.jessentials.commands.Me;
+import com.bluecreeper111.jessentials.commands.More;
 import com.bluecreeper111.jessentials.commands.Pay;
 import com.bluecreeper111.jessentials.commands.Seen;
 import com.bluecreeper111.jessentials.commands.Socialspy;
@@ -44,6 +49,11 @@ public abstract class JCommand implements CommandExecutor {
 		new Socialspy();
 		new Speed();
 		new Seen();
+		new More();
+		new CreateCommand();
+		new ListCommand();
+		new DeleteCommand();
+		new Kit();
 	}
 	
 	public abstract void execute(CommandSender sender, Command cmd, String label, String[] args);

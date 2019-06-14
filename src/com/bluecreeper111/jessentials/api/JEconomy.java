@@ -2,6 +2,8 @@ package com.bluecreeper111.jessentials.api;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import org.bukkit.OfflinePlayer;
@@ -93,18 +95,25 @@ public class JEconomy implements Economy {
 
 	@Override
 	public EconomyResponse depositPlayer(String playerName, double amount) {
-		if (amount < 0) {
+		if (amount <= 0) {
 			return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Cannot add zero dollars!");
 		}
 		double balance = 0;
 		if (economy.isSet("players." + playerName + ".balance")) {
 			balance = economy.getDouble("players." + playerName + ".balance");
 		}
+		String[] test = Double.toString(amount + balance).split(".");
+		if (test.length > 1 && test[1].length() > 2) {
+			DecimalFormat format = new DecimalFormat("#.##");
+			format.setRoundingMode(RoundingMode.CEILING);
+			String full = format.format(amount + balance);
+			economy.set("players." + playerName + ".balance", Double.parseDouble(full));
+			return new EconomyResponse(amount, Double.parseDouble(full), EconomyResponse.ResponseType.SUCCESS, "");
+		}
 		economy.set("players." + playerName + ".balance", balance + amount);
 		try {
 			economy.save(econ);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return new EconomyResponse(amount, balance + amount, EconomyResponse.ResponseType.SUCCESS, "");
@@ -113,18 +122,25 @@ public class JEconomy implements Economy {
 	@Override
 	public EconomyResponse depositPlayer(OfflinePlayer player, double amount) {
 		String playerName = player.getName();
-		if (amount < 0) {
+		if (amount <= 0) {
 			return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Cannot add zero dollars!");
 		}
 		double balance = 0;
 		if (economy.isSet("players." + playerName + ".balance")) {
 			balance = economy.getDouble("players." + playerName + ".balance");
 		}
+		String[] test = Double.toString(amount + balance).split(".");
+		if (test.length > 1 && test[1].length() > 2) {
+			DecimalFormat format = new DecimalFormat("#.##");
+			format.setRoundingMode(RoundingMode.CEILING);
+			String full = format.format(amount + balance);
+			economy.set("players." + playerName + ".balance", Double.parseDouble(full));
+			return new EconomyResponse(amount, Double.parseDouble(full), EconomyResponse.ResponseType.SUCCESS, "");
+		}
 		economy.set("players." + playerName + ".balance", balance + amount);
 		try {
 			economy.save(econ);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return new EconomyResponse(amount, balance + amount, EconomyResponse.ResponseType.SUCCESS, "");

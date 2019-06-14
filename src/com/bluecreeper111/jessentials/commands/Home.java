@@ -32,7 +32,7 @@ public class Home implements CommandExecutor {
 			return true;
 		} else {
 			Player p = (Player) sender;
-			int homeNumber = SetHome.homes.contains(p.getName()) ? SetHome.homes.getConfigurationSection(p.getName()).getKeys(false).size() : 0;
+			int homeNumber = (SetHome.homes.isSet(p.getName()) ? SetHome.homes.getConfigurationSection(p.getName()).getKeys(false).size() : 0);
 			if (!p.hasPermission(api.perp() + ".home")) {
 				api.noPermission(p);
 				return true;

@@ -13,7 +13,6 @@ public class Eco extends JCommand {
 
 	public Eco() {
 		super("economy", (plugin.getConfig().getString("permissionPrefix") + ".economy"), true);
-		
 	}
 
 	

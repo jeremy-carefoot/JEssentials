@@ -12,6 +12,7 @@ import org.bukkit.permissions.Permission;
 
 import com.bluecreeper111.jessentials.Main;
 import com.bluecreeper111.jessentials.api.api;
+import com.bluecreeper111.jessentials.commands.Kit;
 import com.bluecreeper111.jessentials.commands.Msg;
 import com.bluecreeper111.jessentials.commands.Nick;
 
@@ -32,6 +33,7 @@ public class playerJoinLeave implements Listener {
 		String nick = Main.playerData.getString(e.getPlayer().getName() + ".nick");
 		String realnameKey = Main.playerData.getString(e.getPlayer().getName() + ".realnameKey");
 		String motd = plugin.getConfig().getString("motd");
+		String firstJoinMessage = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("firstJoinMessage"));
 		if (plugin.getConfig().getBoolean("enable-startupMessage") && e.getPlayer().isOp()) {
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 				public void run() {
@@ -72,14 +74,21 @@ public class playerJoinLeave implements Listener {
 			motd = PlaceholderAPI.setPlaceholders(e.getPlayer(), motd);
 			}
 		}
-		if (e.getPlayer().hasPermission(api.perp() + ".*") && Main.getPermissions() != null) {
-			for (Permission permission : Bukkit.getPluginManager().getPermissions()) {
-				Main.getPermissions().playerAdd(e.getPlayer(), permission.getName());
+		if (!e.getPlayer().hasPlayedBefore()) {
+			Bukkit.broadcastMessage(firstJoinMessage.replaceAll("%player%", e.getPlayer().getName()));
+			for (String kit : Kit.kits.getConfigurationSection("Kit").getKeys(false)) {
+				if (Kit.kits.getBoolean("Kit." + kit + ".firstjoin")) {
+					Kit.addInventory(e.getPlayer(), kit);
+				}
 			}
 		}
-	
-		
-		
+		if (e.getPlayer().hasPermission(api.perp() + ".*") && Main.getPermissions() != null) {
+			for (Permission permission : Bukkit.getPluginManager().getPermissions()) {
+				if (permission.getName().startsWith(api.perp())) {
+					Main.getPermissions().playerAdd(e.getPlayer(), permission.getName());
+				}
+			}
+		}
 	}
 	
 	@EventHandler

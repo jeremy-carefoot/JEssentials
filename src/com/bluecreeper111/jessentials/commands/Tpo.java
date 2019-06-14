@@ -3,6 +3,7 @@ package com.bluecreeper111.jessentials.commands;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -34,7 +35,7 @@ public class Tpo implements CommandExecutor {
 				}
 				playerDeath.deathInfo.put(target.getName(), target.getLocation());
 				target.teleport(to);
-				target.sendMessage(api.teleportMessage.replaceAll("%delay%", "0"));
+				target.sendMessage(api.getLangString("teleportMessage").replaceAll("%delay%", "0"));
 				logger.info(api.getLangString("playersTeleported"));
 				return true;
 
@@ -54,7 +55,7 @@ public class Tpo implements CommandExecutor {
 						playerDeath.deathInfo.put(p.getName(), p.getLocation());
 						p.teleport(target);
 						p.sendMessage(api.teleportMessage.replaceAll("%delay%", "0"));
-						if (!Vanish.vanishedPlayers.contains(p)) {
+						if (!Vanish.vanishedPlayers.contains(p) || !(p.getGameMode() == GameMode.SPECTATOR)) {
 						target.sendMessage(api.getLangString("teleportingReceive").replaceAll("%player%", p.getName()));
 						}
 						return true;

@@ -14,7 +14,7 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/clear §7- Clears your inventory.");
 	        sender.sendMessage("§e/fly §7- Enables/Disables flying.");
 	        sender.sendMessage("§e/gm[c,s,a,sp] §7- Changes player's gamemode.");
-	        sender.sendMessage("§8------------------§6Page 1/14§8------------------");
+	        sender.sendMessage("§8------------------§6Page 1/16§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("2")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
@@ -23,7 +23,7 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/enchant §7- Enchants item player is holding with specified enchant.");
 	        sender.sendMessage("§e/je §7- Plugin info/Reload config");
 	        sender.sendMessage("§e/broadcast §7- Publicly broadcast a message.");
-	        sender.sendMessage("§8------------------§6Page 2/14§8------------------");
+	        sender.sendMessage("§8------------------§6Page 2/16§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("3")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
@@ -32,7 +32,7 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/motd §7- Allows modification of the server MOTD.");
 	        sender.sendMessage("§e/exp §7- Gives player exp (in levels).");
 	        sender.sendMessage("§e/sethome §7- Set a home.");
-	        sender.sendMessage("§8------------------§6Page 3/14§8------------------");
+	        sender.sendMessage("§8------------------§6Page 3/16§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("4")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
@@ -41,16 +41,16 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/back §7- Teleports to death/previous teleport location.");
 	        sender.sendMessage("§e/invsee §7- Allow modification/viewing of a players inventory.");
 	        sender.sendMessage("§e/item §7- Gives an item based on Bukkit item id's.");
-	        sender.sendMessage("§8------------------§6Page 4/14§8------------------");
+	        sender.sendMessage("§8------------------§6Page 4/16§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("5")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
 	        sender.sendMessage("§e/kick §7- Kicks a player.");
-	        sender.sendMessage("§e/kit §7- Ability to manipulate/get kits.");
+	        sender.sendMessage("§e/kit §7- Get a kit.");
 	        sender.sendMessage("§e/msg §7- Messages a player.");
 	        sender.sendMessage("§e/reply §7- Replys to a player's message");
 	        sender.sendMessage("§e/mute §7- Mutes a player.");
-	        sender.sendMessage("§8------------------§6Page 5/14§8------------------");
+	        sender.sendMessage("§8------------------§6Page 5/16§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("6")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
@@ -59,7 +59,7 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/getpos §7- Gets coordinates of a player.");
 	        sender.sendMessage("§e/repair §7- Repairs item in hand, or whole inventory.");
 	        sender.sendMessage("§e/setspawn §7- Sets the server spawn.");
-	        sender.sendMessage("§8------------------§6Page 6/14§8------------------");
+	        sender.sendMessage("§8------------------§6Page 6/16§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("7")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
@@ -68,7 +68,7 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/delwarp §7- Deletes a warp.");
 	        sender.sendMessage("§e/warp §7- Teleports to a warp.");
 	        sender.sendMessage("§e/warps §7- Lists warps.");
-	        sender.sendMessage("§8------------------§6Page 7/14§8------------------");
+	        sender.sendMessage("§8------------------§6Page 7/16§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("8")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
@@ -77,7 +77,7 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/tpa §7- Request to teleport to a player.");
 	        sender.sendMessage("§e/tpahere §7- Request a player to teleport to you.");
 	        sender.sendMessage("§e/tpaccept §7- Accept a teleport request.");
-	        sender.sendMessage("§8------------------§6Page 8/14§8------------------");
+	        sender.sendMessage("§8------------------§6Page 8/16§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("9")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
@@ -86,7 +86,7 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/tp §7- Teleports to a player.");
 	        sender.sendMessage("§e/tpo §7- Force teleports to a player.");
 	        sender.sendMessage("§e/tppos §7- Teleport to direct coordinates.");
-	        sender.sendMessage("§8------------------§6Page 9/14§8------------------");
+	        sender.sendMessage("§8------------------§6Page 9/16§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("10")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
@@ -95,7 +95,7 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/time §7- Set the time in the world.");
 	        sender.sendMessage("§e/ptime §7- Set the player's time.");
 	        sender.sendMessage("§e/weather §7- Set the weather for the world.");
-	        sender.sendMessage("§8------------------§6Page 10/14§8------------------");
+	        sender.sendMessage("§8------------------§6Page 10/16§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("11")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
@@ -104,7 +104,7 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/jhelp §7- Plugin help.");
 	        sender.sendMessage("§e/ban §7- Bans the specified player.");
 	        sender.sendMessage("§e/unban §7- Unbans the specified player.");
-	        sender.sendMessage("§8------------------§6Page 11/14§8------------------");
+	        sender.sendMessage("§8------------------§6Page 11/16§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("12")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
@@ -113,7 +113,7 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/afk §7- Enables/disables afk mode.");
 	        sender.sendMessage("§e/list §7- Lists all online players.");
 	        sender.sendMessage("§e/sudo §7- Put something in another players chat bar and run it.");
-	        sender.sendMessage("§8------------------§6Page 12/14§8------------------");
+	        sender.sendMessage("§8------------------§6Page 12/16§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("13")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
@@ -121,8 +121,8 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/pay §7- Pays a player money. ");
 	        sender.sendMessage("§e/baltop §7- Shows all top balances on the server.");
 	        sender.sendMessage("§e/economy §7- Change any players balance.");
-	        sender.sendMessage(" ");
-	        sender.sendMessage("§8------------------§6Page 13/14§8------------------");
+	        sender.sendMessage("§e/more §7- Maxes the stack size of the item you are holding.");
+	        sender.sendMessage("§8------------------§6Page 13/16§8------------------");
 	        return true;
 		} else if ((args.length == 1) && args[0].equalsIgnoreCase("14")) {
 			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
@@ -131,10 +131,28 @@ public class JHelp implements CommandExecutor {
 	        sender.sendMessage("§e/socialspy §7- View other players private messages.");
 	        sender.sendMessage("§e/speed §7- Change your speed.");
 	        sender.sendMessage("§e/seen §7- View when a player was last online.");
-	        sender.sendMessage("§8------------------§6Page 14/14§8------------------");
+	        sender.sendMessage("§8------------------§6Page 14/16§8------------------");
+	        return true;
+		} else if ((args.length == 1) && args[0].equalsIgnoreCase("15")) {
+			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
+	        sender.sendMessage("§e/createcommand §7- Create custom commands for use in-game.");
+	        sender.sendMessage("§e/listcommands §7- Lists all custom commands.");
+	        sender.sendMessage("§e/deletecommand §7- Delete a custom command.");
+	        sender.sendMessage("§e/kitadd §7- Create a new kit.");
+	        sender.sendMessage("§e/kitdelete §7- Delete a kit.");
+	        sender.sendMessage("§8------------------§6Page 15/16§8------------------");
+	        return true;
+		} else if ((args.length == 1) && args[0].equalsIgnoreCase("16")) {
+			sender.sendMessage("§8----------§6Just Essentials Help§8----------");
+	        sender.sendMessage("§e/kitoptions §7- Configure different options in a kit.");
+	        sender.sendMessage("§e/kitgive §7- Give a kit to a different player.");
+	        sender.sendMessage(" ");
+	        sender.sendMessage(" ");
+	        sender.sendMessage(" ");
+	        sender.sendMessage("§8------------------§6Page 16/16§8------------------");
 	        return true;
 		} else {
-			sender.sendMessage("§c/jhelp <1-14>");
+			sender.sendMessage("§c/jhelp <1-16>");
 			return true;
 		}
 	}

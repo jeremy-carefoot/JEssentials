@@ -3,7 +3,6 @@ package com.bluecreeper111.jessentials.commands;
 import java.io.File;
 import java.io.IOException;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,18 +27,13 @@ public class SetHome implements CommandExecutor {
 	public static YamlConfiguration homes = YamlConfiguration.loadConfiguration(homesFile);
 	
 	public Integer howManyHomes(Player p) {
-		if (Main.getPermissions() != null) {
-			String group = Main.getPermissions().getPrimaryGroup(p) != null ? Main.getPermissions().getPrimaryGroup(p) : "default";
-			for (String match : plugin.getConfig().getConfigurationSection("homes").getKeys(false)) {
-				if (group.equalsIgnoreCase(match)) {
-					return plugin.getConfig().getInt("homes." + match);
-				}
+		if (p.isOp()) return 1000;
+		for (String group : plugin.getConfig().getConfigurationSection("homes").getKeys(false)) {
+			if (p.hasPermission(api.perp() + ".sethome.multiple." + group)) {
+				return plugin.getConfig().getInt("homes." + group);
 			}
-			return 1;
-		} else {
-			Bukkit.getConsoleSender().sendMessage("§cError: No permissions plugin installed.");
-			return 1;
 		}
+		return 1;
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -49,7 +43,7 @@ public class SetHome implements CommandExecutor {
 			return true;
 		}
 		Player p = (Player) sender;
-		int houseNumber = homes.contains(p.getName()) ? homes.getConfigurationSection(p.getName()).getKeys(false).size() : 0;
+		int houseNumber = (homes.isSet(p.getName()) ? homes.getConfigurationSection(p.getName()).getKeys(false).size() : 0);
 		if (!p.hasPermission(api.perp() + ".sethome")) {
 			api.noPermission(p);
 			return true;

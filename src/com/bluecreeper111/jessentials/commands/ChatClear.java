@@ -17,7 +17,7 @@ public class ChatClear implements CommandExecutor {
 
 		if (!(sender instanceof Player)) {
 			if (args.length == 0) {
-				for (int i = 0; i < 60; i++) {
+				for (int i = 0; i < 70; i++) {
 					Bukkit.broadcastMessage(" ");
 				}
 				Bukkit.broadcastMessage(chatClear);
@@ -28,7 +28,7 @@ public class ChatClear implements CommandExecutor {
 					api.pNotFoundConsole(args[0]);
 					return true;
 				}
-				for (int i = 0; i < 60; i++) {
+				for (int i = 0; i < 70; i++) {
 					target.sendMessage(" ");
 				}
 				target.sendMessage(chatClear);
@@ -41,7 +41,7 @@ public class ChatClear implements CommandExecutor {
 					api.noPermission(p);
 					return true;
 				} else if (p.hasPermission(api.perp() + ".chatclear")) {
-					for (int i = 0; i < 60; i++) {
+					for (int i = 0; i < 70; i++) {
 						Bukkit.broadcastMessage(" ");
 					}
 					Bukkit.broadcastMessage(chatClear);

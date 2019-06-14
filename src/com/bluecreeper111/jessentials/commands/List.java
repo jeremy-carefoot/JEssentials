@@ -11,14 +11,13 @@ import com.bluecreeper111.jessentials.api.api;
 public class List extends JCommand {
 
 	public List() {
-		super("list", (plugin.getConfig().getString("permissionPrefix") + ".list"), false);
+		super("list", (plugin.getConfig().getString("permissionPrefix") + ".list"), true);
 	}
 
 
 	public void execute(CommandSender sender, Command cmd, String label, String[] args) {
 		
-		Player p = (Player) sender;
-		if (p.hasPermission(api.perp() + ".list.hidden")) {
+		if (sender.hasPermission(api.perp() + ".list.hidden")) {
 			String text = "";
 			String vanished = "";
 			int vanishedPlayers = Vanish.vanishedPlayers.size();
@@ -29,9 +28,9 @@ public class List extends JCommand {
 			for (Player player : Vanish.vanishedPlayers) {
 				vanished = vanished + player.getDisplayName() + "§r, ";
 			}
-			p.sendMessage(api.getLangString("listHeader").replaceAll("%players%", Integer.toString(Bukkit.getOnlinePlayers().size() - vanishedPlayers)) + "§r\n" + text);
+			sender.sendMessage(api.getLangString("listHeader").replaceAll("%players%", Integer.toString(Bukkit.getOnlinePlayers().size() - vanishedPlayers)) + "§r\n" + text);
 			if (Vanish.vanishedPlayers.size() > 0) {
-				p.sendMessage(api.getLangString("listHidden").replaceAll("%hidden%", Integer.toString(vanishedPlayers)) + "§r\n" + vanished);
+				sender.sendMessage(api.getLangString("listHidden").replaceAll("%hidden%", Integer.toString(vanishedPlayers)) + "§r\n" + vanished);
 			}
 			return;
 			
@@ -43,7 +42,7 @@ public class List extends JCommand {
 				if (Vanish.vanishedPlayers.contains(player)) { break; }
 				text = text + player.getDisplayName() + "§r, ";
 			}
-			p.sendMessage(api.getLangString("listHeader").replaceAll("%players%", Integer.toString(Bukkit.getOnlinePlayers().size() - vanishedPlayers)) + "§r\n" + text);
+			sender.sendMessage(api.getLangString("listHeader").replaceAll("%players%", Integer.toString(Bukkit.getOnlinePlayers().size() - vanishedPlayers)) + "§r\n" + text);
 			return;
 		}
 		
