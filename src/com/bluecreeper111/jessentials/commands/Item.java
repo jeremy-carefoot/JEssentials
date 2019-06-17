@@ -38,7 +38,28 @@ public class Item implements CommandExecutor {
 					return true;
 				}
 				if (Material.getMaterial(args[0].toUpperCase()) == null) {
-					p.sendMessage(api.getLangString("itemNotFound"));
+					Class<? extends Material> cls = Material.class;
+					try {
+						Field f = cls.getField(args[0].toUpperCase());
+						Object obj = f.get(cls);
+						if (cls.isAssignableFrom(obj.getClass())) {
+							Material value = cls.cast(obj);
+							if (this.ifInt(args[1])) {
+								int amount = Integer.parseInt(args[1]);
+								ItemStack item = new ItemStack(value, amount);
+								p.getInventory().addItem(item);
+								p.sendMessage(itemMessage.replaceAll("%player%", p.getName().toString()).replaceAll("%item%", args[0]));
+								return true;
+							} else {
+								api.incorrectSyntax(p, "/item <item id> <amount>");
+								return true;
+							}
+						}
+					} catch (NoSuchFieldException e) {
+						p.sendMessage(api.getLangString("itemNotFound"));
+					} catch (Exception e) {
+						p.sendMessage(api.getLangString("itemNotFound"));
+					}
 					return true;
 				} else {
 					if (this.ifInt(args[1])) {
