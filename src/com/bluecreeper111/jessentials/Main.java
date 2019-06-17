@@ -21,104 +21,48 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import com.bluecreeper111.jessentials.api.JCommand;
-import com.bluecreeper111.jessentials.api.JEconomy;
-import com.bluecreeper111.jessentials.api.Language;
-import com.bluecreeper111.jessentials.api.VaultHook;
-import com.bluecreeper111.jessentials.api.teleportDelay;
-import com.bluecreeper111.jessentials.api.teleportSafety;
-import com.bluecreeper111.jessentials.commands.Afk;
-import com.bluecreeper111.jessentials.commands.Back;
-import com.bluecreeper111.jessentials.commands.Ban;
-import com.bluecreeper111.jessentials.commands.BanIP;
-import com.bluecreeper111.jessentials.commands.Broadcast;
-import com.bluecreeper111.jessentials.commands.ChatClear;
-import com.bluecreeper111.jessentials.commands.Clear;
-import com.bluecreeper111.jessentials.commands.CreateCommand;
-import com.bluecreeper111.jessentials.commands.DelHome;
-import com.bluecreeper111.jessentials.commands.DelWarp;
-import com.bluecreeper111.jessentials.commands.Enchant;
-import com.bluecreeper111.jessentials.commands.Enderchest;
-import com.bluecreeper111.jessentials.commands.Exp;
-import com.bluecreeper111.jessentials.commands.Feed;
-import com.bluecreeper111.jessentials.commands.Fly;
-import com.bluecreeper111.jessentials.commands.Gamemode;
-import com.bluecreeper111.jessentials.commands.Getpos;
-import com.bluecreeper111.jessentials.commands.God;
-import com.bluecreeper111.jessentials.commands.Hat;
-import com.bluecreeper111.jessentials.commands.Heal;
-import com.bluecreeper111.jessentials.commands.Home;
-import com.bluecreeper111.jessentials.commands.Ignore;
-import com.bluecreeper111.jessentials.commands.Invsee;
-import com.bluecreeper111.jessentials.commands.Item;
-import com.bluecreeper111.jessentials.commands.JEssentials;
-import com.bluecreeper111.jessentials.commands.JHelp;
-import com.bluecreeper111.jessentials.commands.Kick;
-import com.bluecreeper111.jessentials.commands.Kill;
-import com.bluecreeper111.jessentials.commands.Kit;
-import com.bluecreeper111.jessentials.commands.Mail;
-import com.bluecreeper111.jessentials.commands.Motd;
-import com.bluecreeper111.jessentials.commands.Msg;
-import com.bluecreeper111.jessentials.commands.Mute;
-import com.bluecreeper111.jessentials.commands.Nick;
-import com.bluecreeper111.jessentials.commands.PTime;
-import com.bluecreeper111.jessentials.commands.Realname;
-import com.bluecreeper111.jessentials.commands.Repair;
-import com.bluecreeper111.jessentials.commands.Reply;
-import com.bluecreeper111.jessentials.commands.SetHome;
-import com.bluecreeper111.jessentials.commands.SetSpawn;
-import com.bluecreeper111.jessentials.commands.SetWarp;
-import com.bluecreeper111.jessentials.commands.SetWorldSpawn;
-import com.bluecreeper111.jessentials.commands.Spawn;
-import com.bluecreeper111.jessentials.commands.TempBan;
-import com.bluecreeper111.jessentials.commands.Time;
-import com.bluecreeper111.jessentials.commands.Tp;
-import com.bluecreeper111.jessentials.commands.Tpa;
-import com.bluecreeper111.jessentials.commands.Tpo;
-import com.bluecreeper111.jessentials.commands.Tppos;
-import com.bluecreeper111.jessentials.commands.Tptoggle;
-import com.bluecreeper111.jessentials.commands.Unban;
-import com.bluecreeper111.jessentials.commands.Vanish;
-import com.bluecreeper111.jessentials.commands.Warp;
-import com.bluecreeper111.jessentials.commands.Weather;
-import com.bluecreeper111.jessentials.commands.Workbench;
-import com.bluecreeper111.jessentials.event.commandCooldown;
-import com.bluecreeper111.jessentials.event.playerChat;
-import com.bluecreeper111.jessentials.event.playerDeath;
-import com.bluecreeper111.jessentials.event.playerGamemode;
-import com.bluecreeper111.jessentials.event.playerGive;
-import com.bluecreeper111.jessentials.event.playerJoinLeave;
-import com.bluecreeper111.jessentials.signs.buySign;
-import com.bluecreeper111.jessentials.signs.disposalSign;
-import com.bluecreeper111.jessentials.signs.freeSign;
-import com.bluecreeper111.jessentials.signs.healSign;
-import com.bluecreeper111.jessentials.signs.kitSign;
-import com.bluecreeper111.jessentials.signs.sellSign;
-import com.bluecreeper111.jessentials.signs.warpSign;
-import com.bluecreeper111.jessentials.tab.EcoTab;
-import com.bluecreeper111.jessentials.tab.HomeTab;
-import com.bluecreeper111.jessentials.tab.JEssentialsTab;
-import com.bluecreeper111.jessentials.tab.KitTab;
-import com.bluecreeper111.jessentials.tab.MailTab;
-import com.bluecreeper111.jessentials.tab.TimeTab;
-import com.bluecreeper111.jessentials.tab.WarpTab;
-import com.bluecreeper111.jessentials.tab.WeatherTab;
+import com.bluecreeper111.jessentials.api.*;
+import com.bluecreeper111.jessentials.commands.*;
+import com.bluecreeper111.jessentials.event.*;
+import com.bluecreeper111.jessentials.signs.*;
+import com.bluecreeper111.jessentials.tab.*;
 
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 
 public class Main extends JavaPlugin {
+	
+	/*
+	 * noPermissionMessage = 
+	 * notPlayerMessage = 
+	 * playerNotFound = 
+	 * incorrectSyntaxMessage = 
+	 * permissionPrefix = 
+	 * teleportMessage = 
+	 * tpDelay = 
+	 * tpSafetyLength = 
+	 * tpDelayEnable = 
+	 * pApi = Whether PlaceholderAPI is installed or not
+	 * update = Whether a plugin update is available or not
+	 * economyEnabled = 
+	 * scheduler = 
+	 * playerDataFile = Holds player data
+	 * chat = 
+	 * permission = 
+	 * economyImplementer = 
+	 * vaulthook = 
+	 * economy = 
+	 * checkedVersion = 
+	 * returnedVersion = 
+	 * currentVersion = 
+	 * plugin = 
+	 * lang = Holds the language strings
+	 * language = 
+	 */
 
-	public static String noPermissionMessage;
-	public static String notPlayerMessage;
-	public static String playerNotFound;
-	public static String incorrectSyntaxMessage;
-	public static String permissionPrefix;
-	public static Long tpDelay;
-	public static boolean tpDelayEnable;
-	public static boolean pApi;
-	public static Long tpSafetyLength;
-	public static String teleportMessage;
+	public static String noPermissionMessage, notPlayerMessage, playerNotFound, incorrectSyntaxMessage, permissionPrefix, teleportMessage;
+	public static Long tpDelay, tpSafetyLength;
+	public static boolean tpDelayEnable, pApi, update, economyEnabled;
 	public static BukkitScheduler scheduler;
 	public static File playerDataFile = new File("plugins//JEssentials", "playerdata.yml");
 	public static YamlConfiguration playerData = YamlConfiguration.loadConfiguration(playerDataFile);
@@ -130,19 +74,24 @@ public class Main extends JavaPlugin {
 	public String checkedVersion = "";
 	public double returnedVersion = 0.0D;
 	public double currentVersion = 0.0D;
-	public static boolean update;
-	public static boolean economyEnabled;
 	public static JavaPlugin plugin;
-	public static File lang = new File("plugins//JEssentials", "lang.yml");
-	public static YamlConfiguration language = YamlConfiguration.loadConfiguration(lang);
 
+	/**
+	 * <h1>Constructor</h1>
+	 * The onEnable method is the entry point of the plugin.
+	 * It checks for updates, shows some information and verifies dependency plugin installations.
+	 */
 	public void onEnable() {
 		Logger logger = Bukkit.getLogger();
 		PluginDescriptionFile pdfFile = this.getDescription();
+		
 		logger.info("[JEssentials] -INFO- has been enabled successfuly.");
 		logger.info("[JEssentials] -VERSION- Running version V." + pdfFile.getVersion());
 		logger.info("[JEssentials] -INFO- Please submit all bugs to the github! Project is in early stages!");
+		
 		registerCommands();
+		
+		// Verifies Vault plugin dependency
 		if (Bukkit.getPluginManager().getPlugin("Vault") != null) {
 			economyImplementer = new JEconomy();
 			vaulthook = new VaultHook(this);
@@ -150,8 +99,10 @@ public class Main extends JavaPlugin {
 				vaulthook.hook();
 			}
 		} else {
-			Bukkit.getConsoleSender().sendMessage("§c§l[JEssentials] -ERROR- Vault not found! Plugin may return errors if not installed.");
+			Bukkit.getConsoleSender().sendMessage("Â§cÂ§l[JEssentials] -ERROR- Vault not found! Plugin may return errors if not installed.");
 		}
+		
+		// Verifies PlaceholderAPI plugin dependency
 		if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
 			getLogger().info("-INFO- PlaceholderAPI has been sucessfully hooked.");
 			pApi = true;
@@ -159,19 +110,23 @@ public class Main extends JavaPlugin {
 			getLogger().warning("-WARNING- PlaceholderAPI was not found. Features involving PlaceholderAPI will not correctly function.");
 			pApi = false;
 		}
+		
+		// Tries to load Vault API
 		if (setupChat() && setupPermissions() && setupEconomy()) {
 			logger.info("[JEssentials] Vault API loaded successfully!");
 		} else {
-			Bukkit.getConsoleSender().sendMessage("§c[JEssentials] -ERROR- Vault API failed to load.");
+			Bukkit.getConsoleSender().sendMessage("Â§c[JEssentials] -ERROR- Vault API failed to load.");
 		}
+		
+		// Checks for plugin updates
 		currentVersion = Double.valueOf(pdfFile.getVersion().replaceFirst("1.", "")).doubleValue();
 		if (getConfig().getBoolean("checkForUpdates")) {
 			logger.info("[JEssentials] Checking for new plugin updates...");
 			returnedVersion = this.updateCheck(currentVersion);
 			if (returnedVersion > currentVersion) {
-				Bukkit.getConsoleSender().sendMessage("§e[JEssentials] -WARNING- There is a new version of the plugin available!");
-				Bukkit.getConsoleSender().sendMessage("§e[JEssentials] -WARNING- New version can be found here:");
-				Bukkit.getConsoleSender().sendMessage("§e[JEssentials] -WARNING- https://dev.bukkit.org/projects/just-essentials");
+				Bukkit.getConsoleSender().sendMessage("Â§e[JEssentials] -WARNING- There is a new version of the plugin available!");
+				Bukkit.getConsoleSender().sendMessage("Â§e[JEssentials] -WARNING- New version can be found here:");
+				Bukkit.getConsoleSender().sendMessage("Â§e[JEssentials] -WARNING- https://dev.bukkit.org/projects/just-essentials");
 				update = true;
 			} else if (returnedVersion == 0.0) {
 				update = false;
@@ -179,6 +134,7 @@ public class Main extends JavaPlugin {
 				logger.info("[JEssentials] -INFO- No new updates available!");
 			}
 		}
+		
 		JCommand.registerCommands(this);
 		registerEvents();
 		registerApiStrings();
@@ -187,6 +143,11 @@ public class Main extends JavaPlugin {
 		loadMetrics();
 	}
 
+	/**
+	 * <h1>Destructor</h1>
+	 * The onDisable method is the exit point of the plugin.
+	 * It unhooks Vault and informs the user about the plugin being disabled
+	 */
 	public void onDisable() {
 		Logger logger = Bukkit.getLogger();
 		if (economyEnabled) {
@@ -460,6 +421,7 @@ public class Main extends JavaPlugin {
 		pm.addPermission(new Permission(prefix + ".listcommands"));
 		pm.addPermission(new Permission(prefix + ".kit.give"));
 	}
+	
 	public void saveDefaultConfig() {
 		if (!new File(getDataFolder(), "config.yml").exists()) {
 			saveResource("config.yml", false);
@@ -473,16 +435,7 @@ public class Main extends JavaPlugin {
 			}
 
 		}
-		if (!lang.exists()) {
-			try {
-				lang.createNewFile();
-				Language.addStrings();
-				language.options().copyDefaults(true);
-				language.save(lang);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		Language.addStrings();
 		if (!CreateCommand.commandsf.exists()) {
 			try {
 				CreateCommand.commandsf.createNewFile();
@@ -537,7 +490,7 @@ public class Main extends JavaPlugin {
 			try {
 				chat = rsp.getProvider();
 			} catch (Exception e) {
-				Bukkit.getConsoleSender().sendMessage("§6[JEssentials] -WARNING- Permissions plugin not found. Some features may not work.");
+				Bukkit.getConsoleSender().sendMessage("Â§6[JEssentials] -WARNING- Permissions plugin not found. Some features may not work.");
 				return true;
 			}
 			return true;
@@ -594,7 +547,7 @@ public class Main extends JavaPlugin {
 		try {
 			RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
 			if (rsp == null) {
-				Bukkit.getConsoleSender().sendMessage("§6[JEssentials] -WARNING- No economy plugin found. Some features will not work!");
+				Bukkit.getConsoleSender().sendMessage("Â§6[JEssentials] -WARNING- No economy plugin found. Some features will not work!");
 				economyEnabled = false;
 				return true;
 			}
