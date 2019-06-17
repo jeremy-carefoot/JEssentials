@@ -183,13 +183,13 @@ public class api extends Main {
 		return true;
 	}
 	public static YamlConfiguration getLanguage() {
-		return Main.language;
+		return com.bluecreeper111.jessentials.api.Language.language;
 	}
 	public static String getLangString(String path) {
-		if (Main.language.getString("l." + path) == null) {
+		if (com.bluecreeper111.jessentials.api.Language.language.getString("l." + path) == null) {
 			Bukkit.getLogger().severe("Error occured: Couldn't find message " + path);
 		}
-		return api.translateColor(Main.language.getString("l." + path));
+		return api.translateColor(com.bluecreeper111.jessentials.api.Language.language.getString("l." + path));
 	}
 	public static String perp() {
 		return Main.permissionPrefix;
@@ -209,5 +209,4 @@ public class api extends Main {
 			p.getInventory().addItem(item);
 		}
 	}
-
 }
