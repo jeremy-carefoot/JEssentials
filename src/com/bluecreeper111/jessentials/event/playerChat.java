@@ -35,7 +35,7 @@ public class playerChat implements Listener {
 			event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
 		}
 		if (event.getMessage().contains("\\")) {
-			event.setMessage(event.getMessage().replaceAll("\\", ""));
+			event.setMessage(event.getMessage().replace("\\","\\\\"));
 		}
 		String messageFormat = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("chat-format"));
 		String group = "";
@@ -43,7 +43,7 @@ public class playerChat implements Listener {
 		String prefix = "";
 		if (Main.getChat() != null) {
 			group = Main.getChat().getPrimaryGroup(p);
-			pDisplayName = Main.getChat().getPlayerPrefix(p).replaceAll("&", "ง") + p.getDisplayName() + Main.getChat().getPlayerSuffix(p).replaceAll("&", "ง");
+			pDisplayName = Main.getChat().getPlayerPrefix(p).replaceAll("&", "ยง") + p.getDisplayName() + Main.getChat().getPlayerSuffix(p).replaceAll("&", "ยง");
 			prefix = Main.getChat().getGroupPrefix(p.getWorld().getName(), group);
 		} else {
 			pDisplayName = p.getDisplayName();
