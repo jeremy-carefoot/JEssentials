@@ -5,6 +5,6 @@ Emphasis on customization and appearance. Allow your server to appear as profess
 
 Plugin currently has over **35,000** downloads, and was used on over **500** active multiplayer servers including thousands of players.
 
-**Note**: This project is complete, but **abandoned**. Development has been reallocated to this project's successor: * *JEssentials Reborn*.
+**Note**: This project is complete, but **abandoned**. Development has been reallocated to this project's successor: *JEssentials Reborn*.
 
 SpigotMC page can be found [here](https://www.spigotmc.org/resources/%E2%8C%98-just-essentials-%E2%8C%98-completely-customizable-essentials.65288/).
